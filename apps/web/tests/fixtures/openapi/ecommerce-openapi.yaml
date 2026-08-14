@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: E-Commerce API
+  version: 1.2.0
+  description: Example e-commerce API used for import testing.
+servers:
+  - url: https://api.example.com
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Product:
+      type: object
+      required:
+        - name
+        - price
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+paths:
+  /auth/login:
+    post:
+      operationId: login
+      tags: [Authentication]
+      summary: Log in
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+            example:
+              email: user@example.com
+              password: hunter2
+      responses:
+        "200":
+          description: OK
+  /users:
+    get:
+      operationId: getUsers
+      tags: [Users]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: 20
+      responses:
+        "200":
+          description: OK
+  /users/{id}:
+    get:
+      operationId: getUser
+      tags: [Users]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "200":
+          description: OK
+  /products:
+    get:
+      operationId: listProducts
+      tags: [Products]
+      responses:
+        "200":
+          description: OK
+    post:
+      operationId: createProduct
+      tags: [Products]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Created

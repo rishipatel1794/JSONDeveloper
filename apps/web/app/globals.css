@@ -1,50 +1,180 @@
+@import "tailwindcss";
+
 :root {
+  /* Surfaces */
+  --background: #09090b;
+  --muted: #0f1013;
+  --card: #111318;
+  --elevated: #171a21;
+
+  /* Borders */
+  --border: #272a32;
+  --border-subtle: #1d2027;
+  --input: #272a32;
+  --ring: #3b82f6;
+
+  /* Text */
+  --foreground: #f4f4f5;
+  --card-foreground: #f4f4f5;
+  --muted-foreground: #a1a1aa;
+  --subtle-foreground: #71717a;
+
+  /* Brand */
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-accent: #60a5fa;
+  --primary-foreground: #ffffff;
+
+  /* Secondary surface (buttons, panel bars) */
+  --secondary: #171a21;
+  --secondary-hover: #272a32;
+  --secondary-foreground: #f4f4f5;
+
+  /* Status */
+  --destructive: #ef4444;
+  --destructive-hover: #dc2626;
+  --destructive-foreground: #ffffff;
+  --destructive-muted: #2a1414;
+  --destructive-muted-foreground: #fca5a5;
+  --destructive-border: #4c1d1d;
+
+  --success: #22c55e;
+  --success-foreground: #052e12;
+  --success-muted: #12241a;
+  --success-muted-foreground: #86efac;
+  --success-border: #14532d;
+
+  --warning: #f59e0b;
+  --info: #38bdf8;
+
+  --radius: 0.5rem;
+}
+
+/* Opt-in light theme (defaults to dark, matching the JSON Formatter's editor-first look) */
+:root.light {
   --background: #ffffff;
-  --foreground: #171717;
+  --muted: #f1f5f9;
+  --card: #ffffff;
+  --elevated: #f8fafc;
+
+  --border: #e2e8f0;
+  --border-subtle: #eef2f6;
+  --input: #e2e8f0;
+  --ring: #2563eb;
+
+  --foreground: #0f172a;
+  --card-foreground: #0f172a;
+  --muted-foreground: #64748b;
+  --subtle-foreground: #94a3b8;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-accent: #3b82f6;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f1f5f9;
+  --secondary-hover: #e2e8f0;
+  --secondary-foreground: #0f172a;
+
+  --destructive: #dc2626;
+  --destructive-hover: #b91c1c;
+  --destructive-foreground: #ffffff;
+  --destructive-muted: #fef2f2;
+  --destructive-muted-foreground: #b91c1c;
+  --destructive-border: #fecaca;
+
+  --success: #16a34a;
+  --success-foreground: #ffffff;
+  --success-muted: #f0fdf4;
+  --success-muted-foreground: #15803d;
+  --success-border: #bbf7d0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-elevated: var(--elevated);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-accent: var(--primary-accent);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-muted: var(--destructive-muted);
+  --color-destructive-muted-foreground: var(--destructive-muted-foreground);
+  --color-destructive-border: var(--destructive-border);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-muted: var(--success-muted);
+  --color-success-muted-foreground: var(--success-muted-foreground);
+  --color-success-border: var(--success-border);
+
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-sm: calc(var(--radius) - 5px);
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
   }
-}
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.imgDark {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 
-  .imgLight {
-    display: none;
+  html.light {
+    color-scheme: light;
   }
-  .imgDark {
-    display: unset;
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
   }
+
+  a {
+    color: inherit;
+  }
+}
+
+/* Subtle technical grid used behind the hero — kept extremely low-opacity so it never fights readability */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--color-border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border-subtle) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
 }

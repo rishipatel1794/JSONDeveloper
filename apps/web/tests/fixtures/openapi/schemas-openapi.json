@@ -1,0 +1,54 @@
+{
+	"openapi": "3.0.0",
+	"info": { "title": "Schemas API", "version": "1.0.0" },
+	"servers": [{ "url": "https://api.example.com" }],
+	"paths": {
+		"/orders": {
+			"post": {
+				"operationId": "createOrder",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/Order" }
+						}
+					}
+				},
+				"responses": { "201": { "description": "Created" } }
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Address": {
+				"type": "object",
+				"properties": {
+					"city": { "type": "string" },
+					"zip": { "type": "string" }
+				}
+			},
+			"Order": {
+				"type": "object",
+				"required": ["customerName", "items"],
+				"properties": {
+					"customerName": { "type": "string" },
+					"active": { "type": "boolean" },
+					"shippingAddress": { "$ref": "#/components/schemas/Address" },
+					"items": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"sku": { "type": "string" },
+								"quantity": { "type": "integer" }
+							}
+						}
+					},
+					"status": {
+						"type": "string",
+						"enum": ["pending", "shipped", "delivered"]
+					}
+				}
+			}
+		}
+	}
+}

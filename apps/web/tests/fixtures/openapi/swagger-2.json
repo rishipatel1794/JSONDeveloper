@@ -1,0 +1,39 @@
+{
+	"swagger": "2.0",
+	"info": { "title": "Legacy API", "version": "1.0.0" },
+	"host": "legacy.example.com",
+	"basePath": "/v1",
+	"schemes": ["https"],
+	"paths": {
+		"/items": {
+			"post": {
+				"operationId": "createItem",
+				"parameters": [
+					{
+						"name": "body",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"name": { "type": "string" }
+							}
+						}
+					}
+				],
+				"responses": { "201": { "description": "Created" } }
+			}
+		},
+		"/items/upload": {
+			"post": {
+				"operationId": "uploadItem",
+				"consumes": ["multipart/form-data"],
+				"parameters": [
+					{ "name": "title", "in": "formData", "type": "string" },
+					{ "name": "quantity", "in": "formData", "type": "integer", "default": 1 }
+				],
+				"responses": { "200": { "description": "OK" } }
+			}
+		}
+	}
+}

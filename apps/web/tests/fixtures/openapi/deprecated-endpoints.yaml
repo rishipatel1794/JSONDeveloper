@@ -1,0 +1,28 @@
+openapi: 3.0.0
+info:
+  title: Deprecated Endpoints API
+  version: 1.0.0
+servers:
+  - url: https://api.example.com
+paths:
+  /v1/legacy-users:
+    get:
+      operationId: getLegacyUsers
+      deprecated: true
+      tags: [Users]
+      responses:
+        "200":
+          description: OK
+  /v2/users:
+    get:
+      operationId: getUsersV2
+      tags: [Users]
+      responses:
+        "200":
+          description: OK
+  /internal/debug:
+    trace:
+      operationId: traceDebug
+      responses:
+        "200":
+          description: OK

@@ -1,0 +1,11 @@
+{
+	"name": "@repo/config",
+	"version": "0.0.0",
+	"private": true,
+	"exports": {
+		".": "./src/product.ts"
+	},
+	"devDependencies": {
+		"@types/node": "^22.15.3"
+	}
+}

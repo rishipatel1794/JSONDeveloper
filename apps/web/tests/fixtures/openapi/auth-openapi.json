@@ -1,0 +1,47 @@
+{
+	"openapi": "3.0.0",
+	"info": { "title": "Auth Variants API", "version": "1.0.0" },
+	"servers": [{ "url": "https://api.example.com" }],
+	"security": [{ "bearerAuth": [] }],
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": { "type": "http", "scheme": "bearer" },
+			"apiKeyHeader": { "type": "apiKey", "in": "header", "name": "X-API-Key" },
+			"apiKeyQuery": { "type": "apiKey", "in": "query", "name": "api_key" },
+			"basicAuth": { "type": "http", "scheme": "basic" }
+		}
+	},
+	"paths": {
+		"/protected": {
+			"get": { "operationId": "getProtected", "responses": { "200": { "description": "OK" } } }
+		},
+		"/public": {
+			"get": {
+				"operationId": "getPublic",
+				"security": [],
+				"responses": { "200": { "description": "OK" } }
+			}
+		},
+		"/apikey-header": {
+			"get": {
+				"operationId": "getApiKeyHeader",
+				"security": [{ "apiKeyHeader": [] }],
+				"responses": { "200": { "description": "OK" } }
+			}
+		},
+		"/apikey-query": {
+			"get": {
+				"operationId": "getApiKeyQuery",
+				"security": [{ "apiKeyQuery": [] }],
+				"responses": { "200": { "description": "OK" } }
+			}
+		},
+		"/basic": {
+			"get": {
+				"operationId": "getBasic",
+				"security": [{ "basicAuth": [] }],
+				"responses": { "200": { "description": "OK" } }
+			}
+		}
+	}
+}

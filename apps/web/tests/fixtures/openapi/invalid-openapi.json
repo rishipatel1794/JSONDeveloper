@@ -1,0 +1,4 @@
+{
+	"title": "Not actually an OpenAPI document",
+	"someField": "this document has no openapi/swagger version field at all"
+}

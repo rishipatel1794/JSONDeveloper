@@ -1,0 +1,17 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "Simple API",
+		"version": "1.0.0",
+		"description": "A minimal OpenAPI 3.0 document."
+	},
+	"servers": [{ "url": "https://api.example.com" }],
+	"paths": {
+		"/ping": {
+			"get": {
+				"summary": "Ping the server",
+				"responses": { "200": { "description": "OK" } }
+			}
+		}
+	}
+}

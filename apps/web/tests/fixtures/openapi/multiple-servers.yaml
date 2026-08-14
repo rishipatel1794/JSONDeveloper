@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  title: Multi-Server API
+  version: 1.0.0
+servers:
+  - url: https://dev-api.example.com
+    description: Development
+  - url: https://staging-api.example.com
+    description: Staging
+  - url: https://{environment}.example.com/{version}
+    description: Templated
+    variables:
+      environment:
+        default: prod
+      version:
+        default: v1
+paths:
+  /status:
+    get:
+      operationId: getStatus
+      responses:
+        "200":
+          description: OK
