@@ -1,5 +1,6 @@
 import {
 	Braces,
+	CalendarClock,
 	Code2,
 	Container,
 	Database,
@@ -9,6 +10,7 @@ import {
 	KeyRound,
 	Regex,
 	Send,
+	ShieldCheck,
 	Terminal,
 	Wrench,
 	type LucideIcon,
@@ -94,11 +96,12 @@ export const tools: ToolDefinition[] = [
 	{
 		name: "JSON Validator",
 		slug: "json-validator",
-		href: "/tools/json-validator",
-		description: "Check whether your JSON is syntactically valid.",
+		href: "/json-validator",
+		description: "Validate JSON, debug syntax errors, detect duplicate keys, and analyze structure.",
 		category: "json",
-		icon: Braces,
+		icon: ShieldCheck,
 		popular: true,
+		available: true,
 	},
 	{
 		name: "JSON Minifier",
@@ -339,11 +342,12 @@ export const tools: ToolDefinition[] = [
 	{
 		name: "Timestamp Converter",
 		slug: "timestamp-converter",
-		href: "/tools/timestamp-converter",
-		description: "Convert between Unix timestamps and dates.",
+		href: "/timestamp-converter",
+		description: "Convert, inspect, and debug Unix timestamps, dates, and timezones.",
 		category: "utilities",
-		icon: Wrench,
+		icon: CalendarClock,
 		popular: true,
+		available: true,
 	},
 	{
 		name: "Hash Generator",

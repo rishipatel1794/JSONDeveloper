@@ -49,6 +49,7 @@ export function CollectionItem({ collection, folders, requests, openRequestId, a
 						{ label: "Variables", onClick: () => actions.onCollectionVariables(collection.id) },
 						{ label: "Rename", onClick: () => actions.onRenameCollection(collection.id, collection.name) },
 						{ label: "Duplicate", onClick: () => actions.onDuplicateCollection(collection.id) },
+						{ label: "Export as Postman Collection", onClick: () => actions.onExportCollection(collection.id) },
 						{ label: "Delete", onClick: () => actions.onDeleteCollection(collection.id, collection.name), destructive: true },
 					]}
 				/>

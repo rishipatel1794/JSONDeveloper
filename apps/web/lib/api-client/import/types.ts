@@ -1,3 +1,5 @@
+import type { AuthConfig, KeyValuePair } from "@/lib/tools/shared/http";
+
 import type { ApiBodyType } from "../types";
 
 export type OpenApiFormat = "json" | "yaml";
@@ -97,4 +99,41 @@ export interface ImportedApiDefinition {
 	skipped: SkippedEndpoint[];
 	sourceFormat: OpenApiFormat;
 	sourceVersion: OpenApiVersion;
+}
+
+// ---------------------------------------------------------------------------------------------
+// "Direct" imports (Postman Collection, cURL) — unlike OpenAPI/Swagger, these sources describe
+// requests with concrete, ready-to-use values (real auth tokens, fully-formed URLs) rather than a
+// server + relative-path template, so there's no BASE_URL synthesis step: each request's url/auth/
+// body is carried through to the saved request as-is.
+// ---------------------------------------------------------------------------------------------
+
+export interface DirectImportedRequest {
+	/** Stable synthetic id used for preview selection state — not the eventual storage id. */
+	previewId: string;
+	name: string;
+	method: string;
+	deprecated: boolean;
+	url: string;
+	queryParams: KeyValuePair[];
+	headers: KeyValuePair[];
+	bodyType: ApiBodyType;
+	body: string;
+	formData: KeyValuePair[];
+	auth: AuthConfig;
+}
+
+export interface DirectImportedFolder {
+	name: string;
+	requests: DirectImportedRequest[];
+}
+
+export type DirectImportSourceKind = "postman" | "curl";
+
+export interface DirectApiDefinition {
+	title: string;
+	folders: DirectImportedFolder[];
+	suggestedVariables: ImportedVariableSuggestion[];
+	skipped: SkippedEndpoint[];
+	sourceKind: DirectImportSourceKind;
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { ToolAlert } from "@/components/tools/shared/ToolAlert";
 import { decodeJwt } from "@/lib/tools/jwt/decoder";
@@ -17,9 +18,27 @@ import { JwtSignature } from "./JwtSignature";
 import { JwtTokenStatus } from "./JwtTokenStatus";
 
 export function JwtDecoder() {
+	const searchParams = useSearchParams();
 	const [token, setToken] = useState("");
 	const [decoded, setDecoded] = useState<DecodedJwt | null>(null);
 	const [error, setError] = useState("");
+
+	// Lets other tools (e.g. the JSON Validator's JWT detection) hand off a token via `?token=`
+	// without any shared state — the value only ever exists in this tab's URL and this component's state.
+	useEffect(() => {
+		const tokenFromUrl = searchParams.get("token");
+		if (!tokenFromUrl) return;
+
+		setToken(tokenFromUrl);
+		const result = decodeJwt(tokenFromUrl);
+		if (result.success && result.data) {
+			setDecoded(result.data);
+			setError("");
+		} else {
+			setError(result.error ?? "Unable to decode JWT.");
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- read once from the initial URL only; re-running on searchParams changes would fight the user's own edits
+	}, []);
 
 	function handleDecode() {
 		const result = decodeJwt(token);

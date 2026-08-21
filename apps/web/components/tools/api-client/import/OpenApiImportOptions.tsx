@@ -9,6 +9,8 @@ interface OpenApiImportOptionsProps {
 	suggestedVariables: ImportedVariableSuggestion[];
 	selectedVariableNames: Set<string>;
 	onVariableSelectionChange: (names: Set<string>) => void;
+	/** Hidden for import sources (Postman, cURL) whose request bodies are already concrete values, not generated examples. */
+	showGenerateBodies?: boolean;
 }
 
 export function OpenApiImportOptions({
@@ -20,6 +22,7 @@ export function OpenApiImportOptions({
 	suggestedVariables,
 	selectedVariableNames,
 	onVariableSelectionChange,
+	showGenerateBodies = true,
 }: OpenApiImportOptionsProps) {
 	function toggleVariable(name: string) {
 		const next = new Set(selectedVariableNames);
@@ -52,18 +55,20 @@ export function OpenApiImportOptions({
 				</div>
 			)}
 
-			<div>
-				<p className="mb-1.5 text-sm font-medium text-foreground">Import Options</p>
-				<label className="flex items-center gap-2 text-sm text-muted-foreground">
-					<input
-						type="checkbox"
-						checked={generateBodies}
-						onChange={event => onGenerateBodiesChange(event.target.checked)}
-						className="size-4 rounded border-border accent-primary"
-					/>
-					Generate example request bodies
-				</label>
-			</div>
+			{showGenerateBodies && (
+				<div>
+					<p className="mb-1.5 text-sm font-medium text-foreground">Import Options</p>
+					<label className="flex items-center gap-2 text-sm text-muted-foreground">
+						<input
+							type="checkbox"
+							checked={generateBodies}
+							onChange={event => onGenerateBodiesChange(event.target.checked)}
+							className="size-4 rounded border-border accent-primary"
+						/>
+						Generate example request bodies
+					</label>
+				</div>
+			)}
 
 			{suggestedVariables.length > 0 && (
 				<div>

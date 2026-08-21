@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { KeyRound } from "lucide-react";
 
 import { JwtDecoder } from "@/components/tools/jwt-decoder/JwtDecoder";
@@ -22,7 +23,9 @@ export default function JwtDecoderPage() {
 					description="Decode and inspect JSON Web Tokens directly in your browser."
 				/>
 
-				<JwtDecoder />
+				<Suspense fallback={null}>
+					<JwtDecoder />
+				</Suspense>
 			</div>
 
 			<JwtSeoContent />

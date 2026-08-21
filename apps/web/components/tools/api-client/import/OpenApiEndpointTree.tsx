@@ -4,13 +4,28 @@ import { useState } from "react";
 import { AlertTriangle, ChevronDown, ChevronRight } from "lucide-react";
 
 import { MethodBadge } from "@/components/tools/api-client/workspace/MethodBadge";
-import type { ImportedFolder, ImportedRequest } from "@/lib/api-client/import/types";
 import type { HttpMethod } from "@/lib/tools/shared/http";
 
 const REQUESTS_PER_FOLDER_PAGE = 50;
 
+/**
+ * Structurally minimal — satisfied by both ImportedFolder/ImportedRequest (OpenAPI) and
+ * DirectImportedFolder/DirectImportedRequest (Postman, cURL), so this tree renders any import source's preview.
+ */
+interface EndpointPreview {
+	previewId: string;
+	name: string;
+	method: string;
+	deprecated: boolean;
+}
+
+interface FolderPreview {
+	name: string;
+	requests: EndpointPreview[];
+}
+
 interface OpenApiEndpointTreeProps {
-	folders: ImportedFolder[];
+	folders: FolderPreview[];
 	selectedIds: Set<string>;
 	onChange: (selectedIds: Set<string>) => void;
 }
@@ -23,7 +38,7 @@ export function OpenApiEndpointTree({ folders, selectedIds, onChange }: OpenApiE
 		onChange(allSelected ? new Set() : new Set(allIds));
 	}
 
-	function toggleFolder(folder: ImportedFolder) {
+	function toggleFolder(folder: FolderPreview) {
 		const folderIds = folder.requests.map(request => request.previewId);
 		const allFolderSelected = folderIds.every(id => selectedIds.has(id));
 		const next = new Set(selectedIds);
@@ -62,7 +77,7 @@ export function OpenApiEndpointTree({ folders, selectedIds, onChange }: OpenApiE
 }
 
 interface FolderSectionProps {
-	folder: ImportedFolder;
+	folder: FolderPreview;
 	selectedIds: Set<string>;
 	onToggleFolder: () => void;
 	onToggleRequest: (id: string) => void;
@@ -77,7 +92,7 @@ function FolderSection({ folder, selectedIds, onToggleFolder, onToggleRequest }:
 	const allSelected = folderIds.length > 0 && selectedCount === folderIds.length;
 	const someSelected = selectedCount > 0 && !allSelected;
 
-	const visibleRequests: ImportedRequest[] = folder.requests.slice(0, visibleCount);
+	const visibleRequests: EndpointPreview[] = folder.requests.slice(0, visibleCount);
 	const remaining = folder.requests.length - visibleRequests.length;
 
 	return (

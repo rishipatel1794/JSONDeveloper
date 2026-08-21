@@ -4,8 +4,10 @@ import { useRef, useState } from "react";
 import { Circle, Copy, Loader2, Pencil, Save, Send, Sparkles, Trash2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
+import { CopyButton } from "@/components/ui/CopyButton";
 import { TabPanel } from "@/components/ui/Tabs";
 import { sendApiRequest } from "@/lib/api-client/client";
+import { apiRequestToCurlCommand } from "@/lib/api-client/export/curl-exporter";
 import type { ApiBodyType, ApiRequestConfig, ApiResponse } from "@/lib/api-client/types";
 import { API_EXAMPLES, validateRequestUrl } from "@/lib/api-client/utils";
 import { resolveRequestVariables, resolveString } from "@/lib/api-client/variables/resolver";
@@ -163,6 +165,8 @@ export function ApiClient({
 	const urlPreview = resolveString(request.url, variableMap);
 	const showUrlPreview = request.url.includes("{{") && urlPreview.value !== request.url;
 
+	const curlCommand = apiRequestToCurlCommand(resolveRequestVariables(request, variableMap).request);
+
 	return (
 		<div className="space-y-4">
 			<ApiPrivacyNotice />
@@ -179,6 +183,7 @@ export function ApiClient({
 				</h1>
 
 				<div className="ml-auto flex items-center gap-1.5">
+					<CopyButton value={curlCommand} label="Copy as cURL" ariaLabel="Copy request as cURL command" />
 					<Button onClick={onSave} variant={isDirty || !isSavedRequest ? "primary" : "outline"} size="sm">
 						<Save className="size-3.5" />
 						Save

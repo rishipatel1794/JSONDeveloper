@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Upload } from "lucide-react";
 
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { Button } from "@/components/ui/Button";
+import { consumePendingApiRequest } from "@/lib/api-client/pending-request";
 import type { ApiRequestConfig } from "@/lib/api-client/types";
 import { defaultApiRequest } from "@/lib/api-client/utils";
 import { useWorkspace } from "@/lib/api-client/useWorkspace";
@@ -17,7 +18,9 @@ import { updateEnvironment } from "@/lib/api-client/storage/environments";
 import { createVariable, nameSuggestsSecret, setGlobalVariables } from "@/lib/api-client/storage/variables";
 import { commitOpenApiImport } from "@/lib/api-client/storage/workspace";
 import type { ResolvedVariable } from "@/lib/api-client/variables/types";
+import { buildPostmanCollection } from "@/lib/api-client/export/postman-exporter";
 import type { SavedApiRequest, VariableExtractionRule } from "@/lib/api-client/workspace/types";
+import { downloadTextFile } from "@/lib/download";
 
 import { ApiClient } from "./ApiClient";
 import { ImportApiDialog, type ImportedWorkspaceData } from "./import/ImportApiDialog";
@@ -129,6 +132,25 @@ export function ApiWorkspace() {
 		setEditorKey(crypto.randomUUID());
 		setMode("editor");
 	}
+
+	// Picks up a one-shot "open this in the API Client" handoff from another tool (e.g. the JSON
+	// Validator's "Send to API Client"), if one is waiting.
+	useEffect(() => {
+		const pending = consumePendingApiRequest();
+		if (!pending) return;
+
+		setSavedSnapshot(null);
+		setDraft({
+			...defaultApiRequest(),
+			method: (pending.method as ApiRequestConfig["method"]) || "POST",
+			url: pending.url ?? "",
+			body: pending.body,
+			bodyType: pending.bodyType,
+		});
+		setPendingSaveTarget(null);
+		setEditorKey(crypto.randomUUID());
+		setMode("editor");
+	}, []);
 
 	async function persistExtraction(rules: VariableExtractionRule[], responseBody: string): Promise<string[]> {
 		const result = applyExtractionRules(rules, responseBody, {
@@ -319,6 +341,12 @@ export function ApiWorkspace() {
 		},
 		onDeleteCollection: (id, name) => setDeleteCollectionTarget({ id, name }),
 		onCollectionVariables: id => setCollectionVariablesTargetId(id),
+		onExportCollection: id => {
+			const collection = workspace.collections.find(item => item.id === id);
+			if (!collection) return;
+			const document = buildPostmanCollection(collection, workspace.folders, workspace.requests);
+			downloadTextFile(JSON.stringify(document, null, 2), `${collection.name}.postman_collection.json`, "application/json");
+		},
 		onRenameFolder: (id, currentName) => setRenameFolderTarget({ id, name: currentName }),
 		onDeleteFolder: (id, name) => setDeleteFolderTarget({ id, name }),
 		onRenameRequest: (id, currentName) => setRenameRequestTarget({ id, name: currentName }),

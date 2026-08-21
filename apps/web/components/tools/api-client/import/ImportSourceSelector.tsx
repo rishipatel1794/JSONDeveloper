@@ -11,8 +11,8 @@ interface ImportSourceSelectorProps {
 
 const SOURCES: { value: ImportSourceType; label: string; description: string; icon: typeof FileJson2; available: boolean }[] = [
 	{ value: "openapi", label: "OpenAPI / Swagger", description: "OpenAPI 3.0, 3.1, or Swagger 2.0", icon: FileJson2, available: true },
-	{ value: "curl", label: "cURL", description: "Coming soon", icon: Terminal, available: false },
-	{ value: "postman", label: "Postman Collection", description: "Coming soon", icon: FileCode2, available: false },
+	{ value: "curl", label: "cURL", description: "One or more cURL commands", icon: Terminal, available: true },
+	{ value: "postman", label: "Postman Collection", description: "Collection v2.0 or v2.1", icon: FileCode2, available: true },
 ];
 
 export function ImportSourceSelector({ value, onChange }: ImportSourceSelectorProps) {
