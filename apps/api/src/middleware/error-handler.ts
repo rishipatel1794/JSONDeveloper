@@ -5,6 +5,7 @@ function isPayloadTooLarge(err: unknown): boolean {
 }
 
 // Express only recognizes this as error-handling middleware because it declares exactly 4 params.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- _next must stay declared for that arity check, even though it's never called
 export function errorHandler(err: unknown, _req: Request, res: Response, _next: NextFunction): void {
 	if (res.headersSent) return;
 

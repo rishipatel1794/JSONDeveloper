@@ -1,11 +1,20 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
   "ui": "tui",
+  "globalEnv": [
+    "NODE_ENV",
+    "API_PORT",
+    "WEB_URL",
+    "API_PROXY_ALLOW_PRIVATE_NETWORKS",
+    "API_PROXY_TIMEOUT_MS",
+    "API_PROXY_MAX_RESPONSE_SIZE",
+    "API_PROXY_MAX_REQUEST_SIZE"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", "!.next/dev/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

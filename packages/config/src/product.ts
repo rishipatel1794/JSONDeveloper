@@ -10,7 +10,7 @@ export const productConfig = {
 
     url:
         process.env.NEXT_PUBLIC_PRODUCT_URL ??
-        "http://localhost:3000",
+        "http://localhost:3001",
 
     githubUrl: process.env.NEXT_PUBLIC_GITHUB_URL ?? "",
 } as const;
