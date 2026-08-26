@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Upload } from "lucide-react";
+import { Maximize2, Minimize2, Upload } from "lucide-react";
 
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { Button } from "@/components/ui/Button";
@@ -21,6 +21,7 @@ import type { ResolvedVariable } from "@/lib/api-client/variables/types";
 import { buildPostmanCollection } from "@/lib/api-client/export/postman-exporter";
 import type { SavedApiRequest, VariableExtractionRule } from "@/lib/api-client/workspace/types";
 import { downloadTextFile } from "@/lib/download";
+import { cn } from "@/lib/utils";
 
 import { ApiClient } from "./ApiClient";
 import { ImportApiDialog, type ImportedWorkspaceData } from "./import/ImportApiDialog";
@@ -94,6 +95,26 @@ export function ApiWorkspace() {
 	const [showImportApi, setShowImportApi] = useState(false);
 	const [extractModal, setExtractModal] = useState<{ responseBody: string; initialRows?: ExtractionRow[] } | null>(null);
 	const [pendingBearerVariable, setPendingBearerVariable] = useState(false);
+	const [isFocusMode, setIsFocusMode] = useState(false);
+
+	// Focus mode covers the whole viewport (including the site navbar/footer) — lock background
+	// scroll while it's active, and let Escape exit it like any other fullscreen/overlay UI.
+	useEffect(() => {
+		if (!isFocusMode) return;
+
+		const previousOverflow = document.body.style.overflow;
+		document.body.style.overflow = "hidden";
+
+		function handleKeyDown(event: KeyboardEvent) {
+			if (event.key === "Escape") setIsFocusMode(false);
+		}
+		document.addEventListener("keydown", handleKeyDown);
+
+		return () => {
+			document.body.style.overflow = previousOverflow;
+			document.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [isFocusMode]);
 
 	const isSavedRequest = Boolean(savedSnapshot);
 	const dirty = savedSnapshot ? !isDraftEqual(draft, savedSnapshot) : false;
@@ -355,7 +376,12 @@ export function ApiWorkspace() {
 	};
 
 	return (
-		<div className="flex h-[calc(100vh-4rem)] min-h-[600px] overflow-hidden rounded-xl border border-border">
+		<div
+			className={cn(
+				"flex overflow-hidden",
+				isFocusMode ? "fixed inset-0 z-50 bg-background" : "h-[calc(100vh-4rem)] min-h-150 rounded-xl border border-border",
+			)}
+		>
 			<Sidebar
 				collections={workspace.collections}
 				folders={workspace.folders}
@@ -383,6 +409,17 @@ export function ApiWorkspace() {
 						<Button onClick={() => setShowImportExport(true)} variant="ghost" size="sm">
 							<Upload className="size-3.5" />
 							Import / Export
+						</Button>
+						<Button
+							onClick={() => setIsFocusMode(current => !current)}
+							variant="ghost"
+							size="sm"
+							aria-pressed={isFocusMode}
+							aria-label={isFocusMode ? "Exit focus mode" : "Enter focus mode"}
+							title={isFocusMode ? "Exit focus mode (Esc)" : "Focus mode"}
+						>
+							{isFocusMode ? <Minimize2 className="size-3.5" /> : <Maximize2 className="size-3.5" />}
+							{isFocusMode ? "Exit Focus" : "Focus Mode"}
 						</Button>
 					</div>
 				</div>

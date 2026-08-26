@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
+import { useLayoutEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
 
 import { tokenizeVariableString, type VariableToken } from "@/lib/api-client/variables/resolver";
 import type { ResolvedVariable } from "@/lib/api-client/variables/types";
@@ -15,6 +15,8 @@ interface VariableAwareUrlInputProps {
 	variableMap: Map<string, ResolvedVariable>;
 	onUpdateVariable: (variable: ResolvedVariable, newValue: string) => void;
 	onCreateGlobalVariable: (name: string) => void;
+	/** Fired on Enter — sends the request, the same as clicking Send. */
+	onSubmit?: () => void;
 }
 
 interface TokenPosition {
@@ -38,7 +40,15 @@ const FIELD_TEXT_CLASSES = "h-11 w-full min-w-0 px-3 font-mono text-sm";
  * offsetLeft/offsetWidth. Those measurements position two things: a highlight rectangle behind the
  * token (in a layer between the mirror and the input) and the hover hit-test target.
  */
-export function VariableAwareUrlInput({ value, onChange, error, variableMap, onUpdateVariable, onCreateGlobalVariable }: VariableAwareUrlInputProps) {
+export function VariableAwareUrlInput({
+	value,
+	onChange,
+	error,
+	variableMap,
+	onUpdateVariable,
+	onCreateGlobalVariable,
+	onSubmit,
+}: VariableAwareUrlInputProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const trackRef = useRef<HTMLDivElement>(null);
 	const tokenElsRef = useRef<Map<number, HTMLSpanElement>>(new Map());
@@ -79,6 +89,15 @@ export function VariableAwareUrlInput({ value, onChange, error, variableMap, onU
 	function handleScroll() {
 		syncScroll();
 		setHover(null); // The hovered token's screen position is now stale.
+	}
+
+	function handleKeyDown(event: ReactKeyboardEvent<HTMLInputElement>) {
+		// Ignore Enter while an IME composition is in progress (e.g. typing Japanese/Chinese) — that
+		// Enter confirms the composition, it isn't the user asking to send the request.
+		if (event.key === "Enter" && !event.nativeEvent.isComposing) {
+			event.preventDefault();
+			onSubmit?.();
+		}
 	}
 
 	function handleMouseMove(event: ReactMouseEvent<HTMLInputElement>) {
@@ -126,6 +145,7 @@ export function VariableAwareUrlInput({ value, onChange, error, variableMap, onU
 					type="text"
 					value={value}
 					onChange={event => onChange(event.target.value)}
+					onKeyDown={handleKeyDown}
 					onScroll={handleScroll}
 					onMouseMove={handleMouseMove}
 					onMouseLeave={scheduleClose}

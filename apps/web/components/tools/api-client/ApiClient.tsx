@@ -216,6 +216,7 @@ export function ApiClient({
 							variableMap={variableMap}
 							onUpdateVariable={onUpdateVariable}
 							onCreateGlobalVariable={onCreateGlobalVariable}
+							onSubmit={handleSend}
 						/>
 						{showUrlPreview && (
 							<p className="mt-1 truncate font-mono text-xs text-muted-foreground">
