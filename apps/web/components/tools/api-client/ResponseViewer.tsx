@@ -18,6 +18,9 @@ import { ResponseStatus } from "./ResponseStatus";
 
 type ResponseTab = "pretty" | "raw" | "headers";
 
+const MAX_PRETTY_RESPONSE_CHARS = 100_000;
+const MAX_MONACO_RESPONSE_CHARS = 50_000;
+
 interface ResponseViewerProps {
 	response: ApiResponse;
 	onExtractVariable?: () => void;
@@ -28,14 +31,18 @@ export function ResponseViewer({ response, onExtractVariable }: ResponseViewerPr
 
 	const isJson = isJsonContentType(response.contentType) || looksLikeJson(response.body);
 	const isHtml = /text\/html/i.test(response.contentType);
+	const isLargeResponse = response.body.length > MAX_PRETTY_RESPONSE_CHARS;
+	const useMonaco = response.body.length <= MAX_MONACO_RESPONSE_CHARS;
 
 	const prettyBody = useMemo(() => {
-		if (!isJson) return response.body;
+		if (tab !== "pretty") return response.body;
+		if (!isJson || isLargeResponse) return response.body;
 		const formatted = formatJson(response.body);
 		return formatted.success && formatted.data ? formatted.data : response.body;
-	}, [isJson, response.body]);
+	}, [isJson, isLargeResponse, response.body, tab]);
 
-	const language = isJson ? "json" : isHtml ? "html" : "plaintext";
+	const prettyLanguage = isJson ? "json" : isHtml ? "html" : "plaintext";
+	const rawLanguage = "plaintext";
 	const displayedBody = tab === "raw" ? response.body : prettyBody;
 	const filename = isJson ? "response.json" : "response.txt";
 
@@ -83,11 +90,11 @@ export function ResponseViewer({ response, onExtractVariable }: ResponseViewerPr
 
 					<div className="pt-4">
 						<TabPanel value="pretty" activeValue={tab}>
-							<ResponseBody value={prettyBody} language={language} />
+							<ResponseBody value={prettyBody} language={prettyLanguage} isRaw={false} isLargeResponse={isLargeResponse} useMonaco={useMonaco} />
 						</TabPanel>
 
 						<TabPanel value="raw" activeValue={tab}>
-							<ResponseBody value={response.body} language={language} />
+							<ResponseBody value={response.body} language={rawLanguage} isRaw isLargeResponse={isLargeResponse} useMonaco={useMonaco} />
 						</TabPanel>
 
 						<TabPanel value="headers" activeValue={tab}>

@@ -26,6 +26,8 @@ interface CodeEditorProps {
 	height?: string;
 	language?: string;
 	placeholder?: string;
+	wordWrap?: "on" | "off";
+	optimizeForReadOnly?: boolean;
 	/** Inline error/warning markers (squiggly underlines + Problems entries) — e.g. a JSON syntax error's exact line/column. */
 	markers?: EditorMarker[];
 	/** Bumping this (e.g. to a 1-indexed line number) scrolls that line into view and briefly highlights it — used for "jump to this duplicate key". */
@@ -39,6 +41,8 @@ export function CodeEditor({
 	height = "480px",
 	language = "json",
 	placeholder,
+	wordWrap = "on",
+	optimizeForReadOnly = false,
 	markers,
 	revealLine,
 }: CodeEditorProps) {
@@ -97,17 +101,22 @@ export function CodeEditor({
 			loading={<div className="flex h-full items-center justify-center text-sm text-muted-foreground">Loading editor…</div>}
 			options={{
 				readOnly,
+				domReadOnly: readOnly,
 				minimap: {
 					enabled: false,
 				},
-				mouseWheelZoom: true,
+				mouseWheelZoom: !optimizeForReadOnly,
 				fontSize: 14,
 				lineHeight: 22,
-				wordWrap: "on",
+				wordWrap,
 				automaticLayout: true,
-				formatOnPaste: true,
+				formatOnPaste: !readOnly,
 				formatOnType: false,
 				scrollBeyondLastLine: false,
+				occurrencesHighlight: optimizeForReadOnly ? "off" : "singleFile",
+				selectionHighlight: !optimizeForReadOnly,
+				renderValidationDecorations: optimizeForReadOnly ? "off" : "editable",
+				largeFileOptimizations: true,
 				padding: {
 					top: 12,
 					bottom: 12,
