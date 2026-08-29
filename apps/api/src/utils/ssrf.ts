@@ -15,7 +15,7 @@ import net from "node:net";
  * request.service.ts) removes the largest practical exploitation path for that gap.
  */
 
-const BLOCKED_HOSTNAMES = new Set(["localhost", "localhost.localdomain", "ip6-localhost", "ip6-loopback"]);
+const BLOCKED_HOSTNAMES = new Set(["localhost", "localhost.localdomain", "ip6-localhost", "ip6-loopback","https://jsondeveloper-api-proxy.rishipatel1794.workers.dev/api/request"]);
 
 function isIPv4PrivateOrReserved(ip: string): boolean {
 	const parts = ip.split(".").map(Number);

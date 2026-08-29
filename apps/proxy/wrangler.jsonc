@@ -1,0 +1,8 @@
+{
+  "name": "jsondeveloper-api-proxy",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-29",
+  "vars": {
+    "PROXY_ALLOW_PRIVATE_NETWORKS": "true"
+  }
+}

@@ -1,11 +1,23 @@
 import process from "node:process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { config as loadDotenv } from "dotenv";
+
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
+
+// For monorepo builds, populate env from app-local and repo-root files before reading process.env.
+loadDotenv({ path: path.resolve(currentDir, ".env"), override: true });
+loadDotenv({ path: path.resolve(currentDir, ".env.local"), override: true });
+loadDotenv({ path: path.resolve(currentDir, "../../.env"), override: true });
+loadDotenv({ path: path.resolve(currentDir, "../../.env.local"), override: true });
 
 /** @type {import('next').NextConfig} */
 const isProduction =
 	(process.env.NEXT_PUBLIC_APP_MODE ?? process.env.NODE_ENV ?? "development").toLowerCase() === "production";
 
 const isDevRuntime = (process.env.NEXT_PUBLIC_APP_MODE ?? "development") !== "production";
-const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 function getOrigin(value) {
 	try {

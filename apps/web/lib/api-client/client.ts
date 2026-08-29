@@ -1,6 +1,35 @@
 import type { ApiRequestConfig, ApiResponse, WireApiRequest, WireFormField } from "./types";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
+let runtimeApiBaseUrlPromise: Promise<string> | null = null;
+
+interface RuntimeConfig {
+	NEXT_PUBLIC_API_URL?: string;
+}
+
+async function getRuntimeApiBaseUrl(): Promise<string> {
+	if (typeof window === "undefined") return "";
+
+	if (!runtimeApiBaseUrlPromise) {
+		runtimeApiBaseUrlPromise = fetch("/runtime-config.json", {
+			cache: "no-store",
+		})
+			.then(async response => {
+				if (!response.ok) return "";
+				const config = (await response.json()) as RuntimeConfig;
+				return config.NEXT_PUBLIC_API_URL?.trim() ?? "";
+			})
+			.catch(() => "");
+	}
+
+	return runtimeApiBaseUrlPromise;
+}
+
+function getProxyEndpoint(baseUrl: string): string {
+	const normalized = baseUrl.trim().replace(/\/+$/, "");
+	if (!normalized) return "";
+	return normalized.endsWith("/api/request") ? normalized : `${normalized}/api/request`;
+}
 
 /** Must stay in sync with the backend's per-file cap in apps/api/src/validators/request.validator.ts. */
 export const MAX_FORM_FILE_SIZE_BYTES = 5 * 1024 * 1024;
@@ -52,8 +81,27 @@ function toWireRequest(config: ApiRequestConfig): WireApiRequest {
  * a request goes through this — never call the proxy endpoint directly from a component.
  */
 export async function sendApiRequest(config: ApiRequestConfig, signal?: AbortSignal): Promise<ApiResponse> {
+	const runtimeApiBaseUrl = await getRuntimeApiBaseUrl();
+	const resolvedApiBaseUrl = runtimeApiBaseUrl || API_BASE_URL;
+
+	if (!resolvedApiBaseUrl) {
+		return {
+			success: false,
+			status: 0,
+			statusText: "",
+			headers: {},
+			body: "",
+			contentType: "",
+			size: 0,
+			duration: 0,
+			error: "API base URL is not configured. Set NEXT_PUBLIC_API_URL in runtime-config.json or env.",
+		};
+	}
+
+	const proxyEndpoint = getProxyEndpoint(resolvedApiBaseUrl);
+
 	try {
-		const response = await fetch(`${API_BASE_URL}/api/request`, {
+		const response = await fetch(proxyEndpoint, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(toWireRequest(config)),

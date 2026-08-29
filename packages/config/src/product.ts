@@ -3,6 +3,25 @@ const mode =
         ? "production"
         : "development";
 
+function resolvePublicUrl(rawUrl: string | undefined): string {
+    const fallback = "https://jsondeveloper.rishipatel1794.workers.dev";
+    const candidate = rawUrl?.trim() || (mode === "production" ? fallback : "http://localhost:3001");
+
+    try {
+        const parsed = new URL(candidate);
+        const hostname = parsed.hostname.toLowerCase();
+        const isLocalHost = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+
+        if (mode === "production" && isLocalHost) {
+            return fallback;
+        }
+
+        return parsed.toString().replace(/\/$/, "");
+    } catch {
+        return fallback;
+    }
+}
+
 export const productConfig = {
     name: process.env.NEXT_PUBLIC_PRODUCT_NAME ?? "JSONDeveloper",
 
@@ -13,9 +32,7 @@ export const productConfig = {
         process.env.NEXT_PUBLIC_PRODUCT_DESCRIPTION ??
         "Free tools for developers",
 
-    url:
-        process.env.NEXT_PUBLIC_PRODUCT_URL ??
-        "http://localhost:3001",
+    url: resolvePublicUrl(process.env.NEXT_PUBLIC_PRODUCT_URL),
 
     githubUrl: process.env.NEXT_PUBLIC_GITHUB_URL ?? "",
 

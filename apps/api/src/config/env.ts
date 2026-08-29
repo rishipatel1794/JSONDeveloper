@@ -1,3 +1,13 @@
+import path from "node:path";
+
+import { config as loadDotenv } from "dotenv";
+
+// In this monorepo, package scripts run with cwd inside apps/api.
+// Load both app-local and repo-root env files so deployment and local runs share one source.
+loadDotenv({ path: path.resolve(process.cwd(), ".env") });
+loadDotenv({ path: path.resolve(process.cwd(), ".env.local") });
+loadDotenv({ path: path.resolve(process.cwd(), "../../.env") });
+
 function parseBoolean(value: string | undefined, fallback: boolean): boolean {
 	if (value === undefined) return fallback;
 	return value.toLowerCase() === "true";
