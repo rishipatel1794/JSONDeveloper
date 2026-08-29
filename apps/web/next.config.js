@@ -38,7 +38,7 @@ const contentSecurityPolicy = [
 const nextConfig = {
 	// Produces a self-contained `.next/standalone` output with just the files needed to run the
 	// server — makes self-hosting (Docker, a plain VPS) much smaller to deploy. Vercel ignores this.
-	output: "standalone",
+	output: "export",
 
 	async headers() {
 		return [

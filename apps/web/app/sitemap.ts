@@ -4,6 +4,8 @@ import { productConfig } from "@repo/config";
 
 import { tools } from "@/lib/tools/registry";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
 	const baseUrl = productConfig.url.replace(/\/$/, "");
 	const lastModified = new Date();
