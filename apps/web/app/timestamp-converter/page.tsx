@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
 import { CalendarClock } from "lucide-react";
 
+import { createToolMetadata } from "@/lib/seo";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { TimestampConverter } from "@/components/tools/timestamp-converter/TimestampConverter";
 import { TimestampFaq } from "@/components/tools/timestamp-converter/TimestampFaq";
 import { TimestampSeoContent } from "@/components/tools/timestamp-converter/TimestampSeoContent";
 
-export const metadata: Metadata = {
+export const metadata = createToolMetadata({
 	title: "Timestamp Converter - Unix Timestamp to Date",
 	description:
 		"Convert Unix timestamps to dates, ISO 8601, UTC and local time. Convert dates to Unix seconds and milliseconds with timezone support.",
-};
+	path: "/timestamp-converter",
+	keywords: ["unix timestamp converter", "epoch converter", "timestamp to date"],
+});
 
 export default function TimestampConverterPage() {
 	return (

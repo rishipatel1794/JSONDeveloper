@@ -67,7 +67,7 @@ export const API_EXAMPLES: ApiExample[] = [
 			method: "POST",
 			url: "https://jsonplaceholder.typicode.com/posts",
 			bodyType: "json",
-			body: JSON.stringify({ title: "Developer Tools", body: "Testing API", userId: 1 }, null, 2),
+			body: JSON.stringify({ title: "JSONDeveloper", body: "Testing API", userId: 1 }, null, 2),
 			headers: [createKeyValuePair("Content-Type", "application/json")],
 		},
 	},

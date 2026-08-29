@@ -11,7 +11,7 @@ import { CodeEditor } from "@/components/tools/shared/CodeEditor";
 import { ToolActions } from "./ToolActions";
 
 const DEFAULT_JSON = `{
-  "name": "Developer Tools",
+	"name": "JSONDeveloper",
   "version": "1.0.0",
   "features": [
     "JSON Formatter",

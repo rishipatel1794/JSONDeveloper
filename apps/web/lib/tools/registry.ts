@@ -16,6 +16,8 @@ import {
 	type LucideIcon,
 } from "lucide-react";
 
+import { productConfig } from "@repo/config";
+
 export type CategorySlug = "json" | "api" | "regex" | "database" | "web" | "utilities" | "devops";
 
 export interface CategoryDefinition {
@@ -81,7 +83,7 @@ export const categories: CategoryDefinition[] = [
 	},
 ];
 
-export const tools: ToolDefinition[] = [
+const allTools: ToolDefinition[] = [
 	// JSON
 	{
 		name: "JSON Formatter",
@@ -408,6 +410,12 @@ export const tools: ToolDefinition[] = [
 		icon: Container,
 	},
 ];
+
+export const isProductionAppMode = productConfig.isProduction;
+
+export const tools: ToolDefinition[] = isProductionAppMode
+	? allTools.filter(tool => tool.available)
+	: allTools;
 
 export const popularTools = tools.filter(tool => tool.popular);
 

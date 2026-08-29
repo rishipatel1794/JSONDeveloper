@@ -6,10 +6,18 @@ export default function robots(): MetadataRoute.Robots {
 	const baseUrl = productConfig.url.replace(/\/$/, "");
 
 	return {
-		rules: {
-			userAgent: "*",
-			allow: "/",
-		},
+		rules: [
+			{
+				userAgent: "*",
+				allow: "/",
+			},
+			{
+				userAgent: "Googlebot",
+				allow: "/",
+				crawlDelay: 1,
+			},
+		],
+		host: baseUrl,
 		sitemap: `${baseUrl}/sitemap.xml`,
 	};
 }
