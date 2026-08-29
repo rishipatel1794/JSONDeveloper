@@ -38,6 +38,7 @@
     "eslint": "^9.39.1",
     "tailwindcss": "^4.3.3",
     "typescript": "5.9.2",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.11",
+    "wrangler": "^4.127.1"
   }
 }
