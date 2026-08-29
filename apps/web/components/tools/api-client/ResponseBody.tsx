@@ -11,7 +11,13 @@ interface ResponseBodyProps {
  * never be parsed or executed, only displayed as text (with syntax highlighting for readability).
  */
 export function ResponseBody({ value, language }: ResponseBodyProps) {
+	if (!value) {
+		return <p className="rounded-md border border-border bg-secondary/30 p-4 text-sm text-muted-foreground">No response body.</p>;
+	}
+
 	return (
-		<CodeEditor value={value} onChange={() => {}} readOnly language={language} height="360px" placeholder="No response body" />
+		<div className="response-readonly-editor">
+			<CodeEditor value={value} onChange={() => {}} readOnly language={language} height="360px" placeholder="No response body" />
+		</div>
 	);
 }

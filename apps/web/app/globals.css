@@ -178,3 +178,27 @@
   background-size: 40px 40px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
 }
+
+/* Monaco uses hidden text inputs internally. Keep them invisible in the read-only API response panel. */
+.response-readonly-editor .monaco-editor textarea.inputarea,
+.response-readonly-editor .monaco-editor textarea.native-edit-context,
+.response-readonly-editor .monaco-editor textarea.ime-text-area,
+.response-readonly-editor .monaco-editor textarea.native-edit-context.ime-text-area,
+.response-readonly-editor .monaco-editor .inputarea,
+.response-readonly-editor .monaco-editor .native-edit-context,
+.response-readonly-editor .monaco-editor .ime-text-area {
+  opacity: 0 !important;
+  color: transparent !important;
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: absolute !important;
+  top: -10000px !important;
+  left: -10000px !important;
+}

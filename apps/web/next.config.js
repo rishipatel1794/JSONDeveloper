@@ -5,10 +5,21 @@ const isProduction =
 	(process.env.NEXT_PUBLIC_APP_MODE ?? process.env.NODE_ENV ?? "development").toLowerCase() === "production";
 
 const isDevRuntime = (process.env.NEXT_PUBLIC_APP_MODE ?? "development") !== "production";
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+
+function getOrigin(value) {
+	try {
+		return new URL(value).origin;
+	} catch {
+		return "";
+	}
+}
 
 const scriptSrc = isDevRuntime
 	? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net"
 	: "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net";
+
+const connectSrc = ["'self'", getOrigin(apiBaseUrl)].filter(Boolean).join(" ");
 
 const contentSecurityPolicy = [
 	"default-src 'self'",
@@ -20,7 +31,7 @@ const contentSecurityPolicy = [
 	"style-src 'self' 'unsafe-inline'",
 	"img-src 'self' data: blob:",
 	"font-src 'self' data:",
-	"connect-src 'self'",
+	`connect-src ${connectSrc}`,
 	"worker-src 'self' blob:",
 ].join("; ");
 

@@ -126,17 +126,8 @@ export function ApiClient({
 			}
 		} catch (error) {
 			if (!(error instanceof DOMException && error.name === "AbortError")) {
-				setResponse({
-					success: false,
-					status: 0,
-					statusText: "",
-					headers: {},
-					body: "",
-					contentType: "",
-					size: 0,
-					duration: 0,
-					error: "Unable to reach the API proxy.",
-				});
+				setResponse(null);
+				setSendError("Unable to reach the API proxy.");
 			}
 		} finally {
 			setIsSending(false);

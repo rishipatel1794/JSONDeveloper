@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Editor, { type Monaco, type OnMount } from "@monaco-editor/react";
 
 /** Derived from `OnMount` rather than importing `monaco-editor` directly — it's a transitive dependency, not one of this app's own. */
@@ -43,9 +43,26 @@ export function CodeEditor({
 	revealLine,
 }: CodeEditorProps) {
 	const resolvedPlaceholder = placeholder ?? (readOnly ? "Output will appear here" : "Paste or type here…");
+	const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs-dark");
 
 	const editorRef = useRef<MonacoEditorInstance | null>(null);
 	const monacoRef = useRef<Monaco | null>(null);
+
+	useEffect(() => {
+		function updateThemeFromRootClass() {
+			setEditorTheme(document.documentElement.classList.contains("light") ? "vs" : "vs-dark");
+		}
+
+		updateThemeFromRootClass();
+
+		const observer = new MutationObserver(updateThemeFromRootClass);
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+		});
+
+		return () => observer.disconnect();
+	}, []);
 
 	const handleMount: OnMount = (editorInstance, monacoInstance) => {
 		editorRef.current = editorInstance;
@@ -76,7 +93,7 @@ export function CodeEditor({
 			value={value}
 			onChange={value => onChange(value ?? "")}
 			onMount={handleMount}
-			theme="vs-dark"
+			theme={editorTheme}
 			loading={<div className="flex h-full items-center justify-center text-sm text-muted-foreground">Loading editor…</div>}
 			options={{
 				readOnly,
