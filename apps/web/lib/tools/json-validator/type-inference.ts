@@ -146,19 +146,19 @@ function inferFieldType(value: JsonValue, desiredName: string, ctx: InferenceCon
 	return { kind: "object", ref: ctx.registerObjectShape(desiredName, properties) };
 }
 
-/** Infers named object shapes + the root type for a sample JSON value — shared by the TypeScript and Zod generators. */
-export function inferShapes(value: JsonValue): InferenceResult {
+/** Infers named object shapes + the root type for a sample JSON value — shared by the TypeScript, Zod, Python, PHP, and Java generators. */
+export function inferShapes(value: JsonValue, rootName = "Root"): InferenceResult {
 	const ctx = new InferenceContext();
 
 	if (Array.isArray(value) && value.length > 0 && value.every(isPlainObject)) {
-		const itemType = mergeObjectElements(value as Record<string, JsonValue>[], "Root", ctx);
+		const itemType = mergeObjectElements(value as Record<string, JsonValue>[], rootName, ctx);
 		return { shapes: ctx.shapes, root: itemType, rootIsArray: true };
 	}
 
 	if (Array.isArray(value)) {
-		const itemType = value.length === 0 ? { kind: "unknown" as const } : unionFieldTypes(value.map(item => inferFieldType(item, "Root", ctx)));
+		const itemType = value.length === 0 ? { kind: "unknown" as const } : unionFieldTypes(value.map(item => inferFieldType(item, rootName, ctx)));
 		return { shapes: ctx.shapes, root: itemType, rootIsArray: true };
 	}
 
-	return { shapes: ctx.shapes, root: inferFieldType(value, "Root", ctx), rootIsArray: false };
+	return { shapes: ctx.shapes, root: inferFieldType(value, rootName, ctx), rootIsArray: false };
 }

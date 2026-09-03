@@ -24,7 +24,7 @@ function renderZod(type: FieldType): string {
 
 /** Generates a Zod schema for a sample JSON value — deterministic; `zod` itself is not a runtime dependency of this tool. */
 export function generateZod(value: JsonValue, rootName = "Root"): string {
-	const { shapes, root, rootIsArray } = inferShapes(value);
+	const { shapes, root, rootIsArray } = inferShapes(value, rootName);
 	const blocks: string[] = [`import { z } from "zod";`];
 
 	for (const shape of shapes) {

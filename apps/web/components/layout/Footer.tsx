@@ -22,11 +22,20 @@ const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
 	},
 	{
 		title: "Resources",
-		links: [{ label: "Blog" }, { label: "Developer Guides" }, { label: "FAQ", href: "/#faq" }],
+		links: [
+			{ label: "Blog", href: "/blog" },
+			{ label: "Developer Guides", href: "/developer-guides" },
+			{ label: "FAQ", href: "/#faq" },
+		],
 	},
 	{
 		title: "Company",
-		links: [{ label: "About" }, { label: "Contact" }, { label: "Privacy" }, { label: "Terms" }],
+		links: [
+			{ label: "About", href: "/about" },
+			{ label: "Contact", href: "/contact" },
+			{ label: "Privacy", href: "/privacy" },
+			{ label: "Terms", href: "/terms" },
+		],
 	},
 ];
 

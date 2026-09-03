@@ -6,6 +6,7 @@ const VARIANTS = {
 	neutral: "border-border bg-secondary text-muted-foreground",
 	primary: "border-primary/30 bg-primary/10 text-primary-accent",
 	success: "border-success-border bg-success-muted text-success-muted-foreground",
+	destructive: "border-destructive-border bg-destructive-muted text-destructive-muted-foreground",
 } as const;
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {

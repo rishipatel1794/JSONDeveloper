@@ -40,7 +40,7 @@ const contentSecurityPolicy = [
 	"object-src 'none'",
 	"form-action 'self'",
 	scriptSrc,
-	"style-src 'self' 'unsafe-inline'",
+	"style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
 	"img-src 'self' data: blob:",
 	"font-src 'self' data:",
 	`connect-src ${connectSrc}`,

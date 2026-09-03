@@ -26,7 +26,7 @@ function renderType(type: FieldType): string {
 
 /** Generates TypeScript interfaces for a sample JSON value — deterministic, no dependency on a schema library. */
 export function generateTypeScript(value: JsonValue, rootName = "Root"): string {
-	const { shapes, root, rootIsArray } = inferShapes(value);
+	const { shapes, root, rootIsArray } = inferShapes(value, rootName);
 	const blocks: string[] = [];
 
 	for (const shape of shapes) {

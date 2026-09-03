@@ -6,6 +6,7 @@ import {
 	Database,
 	FileCode2,
 	Fingerprint,
+	GitCompare,
 	Globe,
 	KeyRound,
 	Regex,
@@ -112,6 +113,7 @@ const allTools: ToolDefinition[] = [
 		description: "Compress JSON by removing whitespace.",
 		category: "json",
 		icon: Braces,
+		available: true,
 	},
 	{
 		name: "JSON to TypeScript",
@@ -120,6 +122,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate TypeScript interfaces from JSON.",
 		category: "json",
 		icon: FileCode2,
+		available: true,
 	},
 	{
 		name: "JSON to Zod",
@@ -128,6 +131,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate Zod schemas from JSON.",
 		category: "json",
 		icon: FileCode2,
+		available: true,
 	},
 	{
 		name: "JSON to Python",
@@ -136,6 +140,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate Python dataclasses from JSON.",
 		category: "json",
 		icon: FileCode2,
+		available: true,
 	},
 	{
 		name: "JSON to PHP",
@@ -144,6 +149,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate PHP arrays or classes from JSON.",
 		category: "json",
 		icon: FileCode2,
+		available: true,
 	},
 	{
 		name: "JSON to Java",
@@ -152,6 +158,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate Java classes from JSON.",
 		category: "json",
 		icon: FileCode2,
+		available: true,
 	},
 
 	// API
@@ -358,6 +365,16 @@ const allTools: ToolDefinition[] = [
 		description: "Generate MD5, SHA-1, and SHA-256 hashes.",
 		category: "utilities",
 		icon: Fingerprint,
+	},
+	{
+		name: "Code Diff",
+		slug: "code-diff",
+		href: "/code-diff",
+		description: "Compare two versions of code and see added, removed, and modified lines.",
+		category: "utilities",
+		icon: GitCompare,
+		popular: true,
+		available: true,
 	},
 	{
 		name: "Text Diff",
