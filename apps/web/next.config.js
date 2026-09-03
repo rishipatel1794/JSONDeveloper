@@ -31,7 +31,11 @@ const scriptSrc = isDevRuntime
 	? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net"
 	: "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net";
 
-const connectSrc = ["'self'", getOrigin(apiBaseUrl)].filter(Boolean).join(" ");
+// The API Client calls localhost/127.0.0.1 targets directly from the browser (a remote proxy can
+// never reach them) — allowed on any port since a local dev server's port varies per user/project.
+const connectSrc = ["'self'", getOrigin(apiBaseUrl), "http://localhost:*", "https://localhost:*", "http://127.0.0.1:*", "https://127.0.0.1:*"]
+	.filter(Boolean)
+	.join(" ");
 
 const contentSecurityPolicy = [
 	"default-src 'self'",

@@ -1,4 +1,7 @@
 import type { ApiRequestConfig, ApiResponse, WireApiRequest, WireFormField } from "./types";
+import { parseDataUrl } from "./data-url";
+import { isLocalOrPrivateTarget } from "./local-target";
+import { sendDirectApiRequest } from "./direct-request";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
 let runtimeApiBaseUrlPromise: Promise<string> | null = null;
@@ -33,12 +36,6 @@ function getProxyEndpoint(baseUrl: string): string {
 
 /** Must stay in sync with the backend's per-file cap in apps/api/src/validators/request.validator.ts. */
 export const MAX_FORM_FILE_SIZE_BYTES = 5 * 1024 * 1024;
-
-/** Splits a "data:<mime>;base64,<data>" URL into its parts, as produced by FileReader.readAsDataURL. */
-function parseDataUrl(dataUrl: string): { mimeType: string; base64: string } {
-	const match = /^data:([^;]*);base64,(.*)$/s.exec(dataUrl);
-	return { mimeType: match?.[1] || "application/octet-stream", base64: match?.[2] ?? "" };
-}
 
 function toWireRequest(config: ApiRequestConfig): WireApiRequest {
 	let body: string | null = null;
@@ -77,10 +74,18 @@ function toWireRequest(config: ApiRequestConfig): WireApiRequest {
 }
 
 /**
- * The only module in the app that talks to the Express proxy. Every component that needs to send
- * a request goes through this — never call the proxy endpoint directly from a component.
+ * The only module in the app that sends outbound API requests. Every component that needs to send a
+ * request goes through this — never call the proxy endpoint or `fetch` a target directly from a
+ * component. Local/private-network targets are sent straight from the browser (see local-target.ts);
+ * everything else is relayed through the proxy.
  */
 export async function sendApiRequest(config: ApiRequestConfig, signal?: AbortSignal): Promise<ApiResponse> {
+	// A remote proxy can never reach localhost/private-network targets — they only mean anything on
+	// whichever machine makes the request. The browser making the request directly *is* that machine.
+	if (isLocalOrPrivateTarget(config.url)) {
+		return sendDirectApiRequest(config, signal);
+	}
+
 	const runtimeApiBaseUrl = await getRuntimeApiBaseUrl();
 	const resolvedApiBaseUrl = runtimeApiBaseUrl || API_BASE_URL;
 

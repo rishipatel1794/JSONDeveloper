@@ -9,7 +9,8 @@ export function ApiPrivacyNotice() {
 				<p className="mt-0.5 text-muted-foreground">
 					Requests are sent through our API proxy so this tool can reach APIs that block direct browser requests. Unlike
 					our purely local tools, this data does pass through our server on its way to the target API. Avoid sending
-					highly sensitive production credentials unless you understand that.
+					highly sensitive production credentials unless you understand that. The one exception is a localhost or
+					private-network target — those go straight from your browser, since our server could never reach them anyway.
 				</p>
 			</div>
 		</div>
