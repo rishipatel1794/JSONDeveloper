@@ -4,7 +4,7 @@ const mode =
         : "development";
 
 function resolvePublicUrl(rawUrl: string | undefined): string {
-    const fallback = "https://jsondeveloper.rishipatel1794.workers.dev";
+    const fallback = "https://jsondeveloper.com";
     const candidate = rawUrl?.trim() || (mode === "production" ? fallback : "http://localhost:3001");
 
     try {

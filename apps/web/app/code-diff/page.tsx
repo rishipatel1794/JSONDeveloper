@@ -7,7 +7,7 @@ import { CodeDiffFaq } from "@/components/tools/code-diff/CodeDiffFaq";
 import { CodeDiffSeoContent } from "@/components/tools/code-diff/CodeDiffSeoContent";
 
 export const metadata = createToolMetadata({
-	title: "Code Diff - Compare Code Changes | JSONDeveloper",
+	title: "Code Diff - Compare Code Changes",
 	description: "Compare two versions of code and instantly see added, removed, and modified lines with a GitHub-style diff viewer.",
 	path: "/code-diff",
 	keywords: ["code diff", "diff checker", "compare code", "code comparison tool"],

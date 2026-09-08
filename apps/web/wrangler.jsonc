@@ -1,7 +1,39 @@
 {
   "name": "jsondeveloper",
+  "main": "src/index.js",
   "compatibility_date": "2026-08-29",
   "assets": {
-    "directory": "./out"
+    "directory": "./out",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  // Keeps the legacy jsondeveloper.rishipatel1794.workers.dev URL alive (routed to this same
+  // Worker) so src/index.js can 301-redirect it to the canonical domain rather than it going dark.
+  "workers_dev": true,
+  // Requires jsondeveloper.com to already be an active zone in this Cloudflare account (its
+  // nameservers pointed at Cloudflare) before `wrangler deploy` can provision the custom domain.
+  "routes": [
+    { "pattern": "jsondeveloper.com", "custom_domain": true },
+    // Plain route, not a custom domain — www already has a pre-existing DNS record in this zone,
+    // which blocks Cloudflare from auto-provisioning a Custom Domain for it (see deploy error:
+    // "already has externally managed DNS records"). A plain route just attaches this Worker to
+    // whatever traffic is already proxied through Cloudflare for that hostname, without trying to
+    // create/own the DNS record itself — src/index.js then 301-redirects it to the apex domain.
+    // Requires that existing www DNS record to be proxied (orange-clouded) in the dashboard; if it
+    // isn't, this route receives no traffic until that's switched on.
+    { "pattern": "www.jsondeveloper.com/*", "zone_name": "jsondeveloper.com" }
+  ],
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    },
+    "traces": {
+      "enabled": false,
+      "head_sampling_rate": 1,
+      "persist": true
+    }
   }
 }

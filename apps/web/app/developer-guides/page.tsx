@@ -9,7 +9,7 @@ import { DEVELOPER_GUIDES } from "@/lib/content/guides";
 import { formatContentDate } from "@/lib/content/format-date";
 
 export const metadata = createPageMetadata({
-	title: `Developer Guides - ${productConfig.name}`,
+	title: "Developer Guides",
 	description: `Practical, tool-by-tool guides for getting the most out of ${productConfig.name}.`,
 	path: "/developer-guides",
 });

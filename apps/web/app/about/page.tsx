@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 
 export const metadata = createPageMetadata({
-	title: `About - ${productConfig.name}`,
+	title: "About",
 	description: `Learn what ${productConfig.name} is, how it works, and why every tool runs entirely in your browser.`,
 	path: "/about",
 });

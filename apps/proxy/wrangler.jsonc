@@ -4,5 +4,8 @@
   "compatibility_date": "2026-08-29",
   "vars": {
     "PROXY_ALLOW_PRIVATE_NETWORKS": "true"
-  }
+  },
+  // Requires jsondeveloper.com to already be an active zone in this Cloudflare account before
+  // `wrangler deploy` can provision this — api.jsondeveloper.com is a subdomain of that same zone.
+  "routes": [{ "pattern": "api.jsondeveloper.com", "custom_domain": true }]
 }

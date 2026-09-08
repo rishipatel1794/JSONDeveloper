@@ -9,7 +9,7 @@ const CONTACT_EMAIL = "rishipatel1794@gmail.com";
 const LAST_UPDATED = "August 31, 2026";
 
 export const metadata = createPageMetadata({
-	title: `Terms of Service - ${productConfig.name}`,
+	title: "Terms of Service",
 	description: `The terms for using ${productConfig.name}'s free developer tools.`,
 	path: "/terms",
 });

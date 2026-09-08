@@ -9,7 +9,7 @@ const CONTACT_EMAIL = "rishipatel1794@gmail.com";
 const LAST_UPDATED = "August 31, 2026";
 
 export const metadata = createPageMetadata({
-	title: `Privacy Policy - ${productConfig.name}`,
+	title: "Privacy Policy",
 	description: `How ${productConfig.name} handles your data. Short version: it doesn't leave your browser.`,
 	path: "/privacy",
 });

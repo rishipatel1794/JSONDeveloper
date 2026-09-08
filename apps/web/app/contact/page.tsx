@@ -9,7 +9,7 @@ import { GitHubIcon } from "@/components/icons/GitHubIcon";
 const CONTACT_EMAIL = "rishipatel1794@gmail.com";
 
 export const metadata = createPageMetadata({
-	title: `Contact - ${productConfig.name}`,
+	title: "Contact",
 	description: `Get in touch with the ${productConfig.name} team — report a bug, request a tool, or ask a question.`,
 	path: "/contact",
 });

@@ -9,7 +9,7 @@ import { BLOG_POSTS } from "@/lib/content/blog";
 import { formatContentDate } from "@/lib/content/format-date";
 
 export const metadata = createPageMetadata({
-	title: `Blog - ${productConfig.name}`,
+	title: "Blog",
 	description: `Short, practical write-ups on JSON, JWTs, regex, timestamps, and the other things ${productConfig.name}'s tools deal with every day.`,
 	path: "/blog",
 });
