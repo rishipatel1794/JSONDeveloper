@@ -1,12 +1,28 @@
 /**
- * Sits in front of the static asset deployment purely to 301-redirect legacy hostnames to the
- * canonical domain, preserving the path and query string. Everything else falls through to the
- * static assets binding unchanged — this has no effect on the Next.js build or `output: "export"`.
+ * Sits in front of the static asset deployment to: 301-redirect legacy hostnames to the canonical
+ * domain (preserving path + query), and attach security headers that `output: "export"` can't set
+ * itself (Next.js's `headers()` config is a documented no-op for a static export — this Worker is
+ * the only place in production that actually runs per-request, so it's the only place left that can
+ * add response headers). Otherwise falls through to the static assets binding unchanged — none of
+ * this affects the Next.js build.
  */
 const LEGACY_HOSTNAMES = new Set([
 	"jsondeveloper.rishipatel1794.workers.dev",
 	"www.jsondeveloper.com",
 ]);
+
+/** Applied to every response, redirects included, so browsers pin HTTPS for this host either way. */
+function withSecurityHeaders(response) {
+	const headers = new Headers(response.headers);
+	headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+	headers.set("X-Content-Type-Options", "nosniff");
+
+	return new Response(response.body, {
+		status: response.status,
+		statusText: response.statusText,
+		headers,
+	});
+}
 
 export default {
 	async fetch(request, env) {
@@ -17,9 +33,9 @@ export default {
 			destination.pathname = url.pathname;
 			destination.search = url.search;
 
-			return Response.redirect(destination.toString(), 301);
+			return withSecurityHeaders(Response.redirect(destination.toString(), 301));
 		}
 
-		return env.ASSETS.fetch(request);
+		return withSecurityHeaders(await env.ASSETS.fetch(request));
 	},
 };
