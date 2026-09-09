@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { productConfig } from "@repo/config";
 
-import { tools } from "@/lib/tools/registry";
+import { categories, tools } from "@/lib/tools/registry";
 import { BLOG_POSTS } from "@/lib/content/blog";
 import { DEVELOPER_GUIDES } from "@/lib/content/guides";
 
@@ -42,11 +42,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		priority: 0.5,
 	}));
 
+	const categoryEntries: MetadataRoute.Sitemap = categories.map(category => ({
+		url: `${baseUrl}/category/${category.slug}`,
+		lastModified,
+		changeFrequency: "weekly",
+		priority: 0.5,
+	}));
+
 	return [
 		{ url: baseUrl, lastModified, changeFrequency: "daily", priority: 1 },
 		...toolEntries,
 		...staticEntries,
 		...blogEntries,
 		...guideEntries,
+		...categoryEntries,
 	];
 }

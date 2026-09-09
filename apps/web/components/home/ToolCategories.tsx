@@ -20,7 +20,7 @@ export function ToolCategories() {
 						return (
 							<Link
 								key={category.slug}
-								href={`#popular-tools`}
+								href={`/category/${category.slug}`}
 								className="group rounded-lg border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-elevated"
 							>
 								<span className="flex size-9 items-center justify-center rounded-md bg-primary/10 text-primary">

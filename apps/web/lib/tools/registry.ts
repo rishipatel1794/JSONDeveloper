@@ -443,3 +443,7 @@ export function getToolsByCategory(category: CategorySlug): ToolDefinition[] {
 export function getCategoryToolCount(category: CategorySlug): number {
 	return getToolsByCategory(category).length;
 }
+
+export function getCategory(slug: CategorySlug): CategoryDefinition | undefined {
+	return categories.find(category => category.slug === slug);
+}
