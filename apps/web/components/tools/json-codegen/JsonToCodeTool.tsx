@@ -6,6 +6,7 @@ import { AlertCircle, Code2, FileJson2, Sparkles, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { CodeEditor } from "@/components/tools/shared/CodeEditor";
+import { ToolPanel } from "@/components/tools/shared/ToolPanel";
 import { downloadTextFile } from "@/lib/download";
 import type { JsonValue } from "@/lib/tools/json-validator/types";
 import { generateTypeScript } from "@/lib/tools/json-validator/typescript-generator";
@@ -87,35 +88,27 @@ export function JsonToCodeTool({ target, rootNameLabel, exampleJson, exampleRoot
 			)}
 
 			<div className="grid gap-4 lg:grid-cols-2">
-				<div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-					<div className="flex items-center justify-between border-b border-border bg-secondary px-4 py-2.5">
-						<div className="flex items-center gap-2 text-sm font-medium">
-							<FileJson2 className="size-4 text-muted-foreground" />
-							JSON Input
-						</div>
-					</div>
-
+				<ToolPanel title="JSON Input" icon={FileJson2} enableFullscreen>
 					<CodeEditor value={input} onChange={setInput} language="json" placeholder="Paste JSON here…" />
-				</div>
+				</ToolPanel>
 
-				<div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-					<div className="flex items-center justify-between border-b border-border bg-secondary px-4 py-2.5">
-						<div className="flex items-center gap-2 text-sm font-medium">
-							<Code2 className="size-4 text-muted-foreground" />
-							Generated Code
-						</div>
-						{output && (
+				<ToolPanel
+					title="Generated Code"
+					icon={Code2}
+					enableFullscreen
+					action={
+						output && (
 							<div className="flex items-center gap-2">
 								<CopyButton value={output} ariaLabel="Copy generated code" />
 								<Button onClick={() => downloadTextFile(output, `${rootName.trim() || "Root"}.${fileExtension}`, mimeType)} variant="outline" size="sm">
 									Download
 								</Button>
 							</div>
-						)}
-					</div>
-
+						)
+					}
+				>
 					<CodeEditor value={output} onChange={() => {}} language={monacoLanguage} readOnly placeholder="Generated code will appear here" />
-				</div>
+				</ToolPanel>
 			</div>
 		</div>
 	);

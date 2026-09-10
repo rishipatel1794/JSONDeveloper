@@ -6,6 +6,7 @@ import { AlertCircle, FileJson2, Minimize2, Sparkles, Trash2 } from "lucide-reac
 import { Button } from "@/components/ui/Button";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { CodeEditor } from "@/components/tools/shared/CodeEditor";
+import { ToolPanel } from "@/components/tools/shared/ToolPanel";
 import { downloadTextFile } from "@/lib/download";
 import { minifyJson } from "@/lib/tools/json/formatter";
 import { formatBytes } from "@/lib/tools/json-validator/utils";
@@ -76,36 +77,27 @@ export function JsonMinifier() {
 			)}
 
 			<div className="grid gap-4 lg:grid-cols-2">
-				<div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-					<div className="flex items-center justify-between border-b border-border bg-secondary px-4 py-2.5">
-						<div className="flex items-center gap-2 text-sm font-medium">
-							<FileJson2 className="size-4 text-muted-foreground" />
-							JSON Input
-						</div>
-						<span className="text-xs text-muted-foreground">{formatBytes(inputBytes)}</span>
-					</div>
-
+				<ToolPanel title="JSON Input" icon={FileJson2} action={<span className="text-xs text-muted-foreground">{formatBytes(inputBytes)}</span>} enableFullscreen>
 					<CodeEditor value={input} onChange={setInput} placeholder="Paste JSON here…" />
-				</div>
+				</ToolPanel>
 
-				<div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-					<div className="flex items-center justify-between border-b border-border bg-secondary px-4 py-2.5">
-						<div className="flex items-center gap-2 text-sm font-medium">
-							<Minimize2 className="size-4 text-muted-foreground" />
-							Minified
-						</div>
-						{output && (
+				<ToolPanel
+					title="Minified"
+					icon={Minimize2}
+					enableFullscreen
+					action={
+						output && (
 							<div className="flex items-center gap-2">
 								<CopyButton value={output} ariaLabel="Copy minified JSON" />
 								<Button onClick={() => downloadTextFile(output, "minified.json", "application/json")} variant="outline" size="sm">
 									Download
 								</Button>
 							</div>
-						)}
-					</div>
-
+						)
+					}
+				>
 					<CodeEditor value={output} onChange={() => {}} readOnly placeholder="Minified JSON will appear here" wordWrap="on" />
-				</div>
+				</ToolPanel>
 			</div>
 		</div>
 	);

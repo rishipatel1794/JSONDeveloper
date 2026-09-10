@@ -29,6 +29,7 @@ function rankTool(tool: ToolDefinition, query: string, categoryName: string): nu
 export function ToolSearch() {
 	const [query, setQuery] = useState("");
 	const [activeIndex, setActiveIndex] = useState(0);
+	const [isFocused, setIsFocused] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const router = useRouter();
 
@@ -109,8 +110,9 @@ export function ToolSearch() {
 	return (
 		<div className="relative mx-auto w-full max-w-xl">
 			<div className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 shadow-sm transition-all focus-within:border-primary focus-within:shadow-[0_0_0_3px_var(--color-primary)_/_15%,0_0_24px_-8px_var(--color-primary)]">
-				<span className="shrink-0 select-none font-mono text-sm font-semibold text-primary" aria-hidden="true">
+				<span className="flex shrink-0 select-none items-center font-mono text-sm font-semibold text-primary" aria-hidden="true">
 					&gt;
+					<span className={cn("ml-1 h-4 w-[7px] bg-primary", !isFocused && !query ? "animate-terminal-blink" : "opacity-0")} />
 				</span>
 
 				<input
@@ -119,6 +121,8 @@ export function ToolSearch() {
 					value={query}
 					onChange={event => setQuery(event.target.value)}
 					onKeyDown={handleInputKeyDown}
+					onFocus={() => setIsFocused(true)}
+					onBlur={() => setIsFocused(false)}
 					placeholder="Search developer tools..."
 					aria-label="Search developer tools"
 					role="combobox"

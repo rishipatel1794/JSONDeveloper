@@ -134,7 +134,7 @@ export function SqlFormatter() {
 			{status && !error && <ToolAlert variant="success">{status}</ToolAlert>}
 
 			<div className="grid gap-4 lg:grid-cols-2">
-				<ToolPanel title="SQL Input" icon={FileCode2}>
+				<ToolPanel title="SQL Input" icon={FileCode2} enableFullscreen>
 					<CodeEditor value={input} onChange={setInput} language="sql" placeholder="Paste your SQL query here..." />
 				</ToolPanel>
 

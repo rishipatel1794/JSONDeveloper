@@ -4,7 +4,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const VARIANTS = {
-	primary: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm",
+	primary: "bg-primary text-primary-foreground shadow-sm hover:-translate-y-px hover:bg-primary-hover hover:shadow-[0_4px_20px_-6px_var(--color-primary)]",
 	secondary: "border border-border bg-secondary text-secondary-foreground hover:bg-secondary-hover",
 	outline: "border border-border bg-transparent text-foreground hover:bg-secondary",
 	ghost: "text-foreground hover:bg-secondary",
@@ -26,7 +26,7 @@ interface SharedProps {
 }
 
 const base =
-	"inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+	"inline-flex items-center justify-center gap-2 rounded-md font-medium transition-[background-color,border-color,color,transform,box-shadow] duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50 disabled:active:scale-100";
 
 interface ButtonProps extends SharedProps, ButtonHTMLAttributes<HTMLButtonElement> {
 	href?: undefined;

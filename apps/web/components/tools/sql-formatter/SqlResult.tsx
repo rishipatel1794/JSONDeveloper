@@ -10,7 +10,7 @@ interface SqlResultProps {
 
 export function SqlResult({ value }: SqlResultProps) {
 	return (
-		<ToolPanel title="Formatted SQL" icon={FileCode2} action={<CopyButton value={value} label="Copy" disabled={!value} />}>
+		<ToolPanel title="Formatted SQL" icon={FileCode2} action={<CopyButton value={value} label="Copy" disabled={!value} />} enableFullscreen>
 			<CodeEditor
 				value={value}
 				onChange={() => {}}

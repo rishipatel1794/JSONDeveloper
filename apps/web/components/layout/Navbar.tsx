@@ -42,11 +42,18 @@ export function Navbar() {
 								href={link.href}
 								aria-current={isActive ? "page" : undefined}
 								className={cn(
-									"rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary hover:text-foreground",
-									isActive ? "text-primary" : "text-muted-foreground",
+									"group relative px-3 py-2 text-sm font-medium transition-colors",
+									isActive ? "text-primary" : "text-muted-foreground hover:text-foreground",
 								)}
 							>
 								{link.label}
+								<span
+									aria-hidden="true"
+									className={cn(
+										"absolute inset-x-3 -bottom-px h-px origin-center scale-x-0 bg-primary transition-transform duration-200 ease-out group-hover:scale-x-100",
+										isActive && "scale-x-100",
+									)}
+								/>
 							</Link>
 						);
 					})}

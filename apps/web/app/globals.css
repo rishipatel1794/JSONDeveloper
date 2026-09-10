@@ -139,6 +139,19 @@
 
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+
+  --animate-terminal-blink: terminal-blink 1.1s steps(1) infinite;
+}
+
+@keyframes terminal-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
 }
 
 @layer base {

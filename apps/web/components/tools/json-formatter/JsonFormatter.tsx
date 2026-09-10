@@ -7,6 +7,7 @@ import { downloadTextFile } from "@/lib/download";
 import { formatJson, minifyJson, validateJson } from "../../../lib/tools/json/formatter";
 
 import { CodeEditor } from "@/components/tools/shared/CodeEditor";
+import { ToolPanel } from "@/components/tools/shared/ToolPanel";
 
 import { ToolActions } from "./ToolActions";
 
@@ -124,29 +125,13 @@ export function JsonFormatter() {
 			)}
 
 			<div className="grid gap-4 lg:grid-cols-2">
-				<div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-					<div className="flex items-center justify-between border-b border-border bg-secondary px-4 py-2.5">
-						<div className="flex items-center gap-2 text-sm font-medium">
-							<FileJson2 className="size-4 text-muted-foreground" />
-							Input
-						</div>
-						<span className="text-xs text-muted-foreground">{inputStats}</span>
-					</div>
-
+				<ToolPanel title="Input" icon={FileJson2} action={<span className="text-xs text-muted-foreground">{inputStats}</span>} enableFullscreen>
 					<CodeEditor value={input} onChange={setInput} />
-				</div>
+				</ToolPanel>
 
-				<div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-					<div className="flex items-center justify-between border-b border-border bg-secondary px-4 py-2.5">
-						<div className="flex items-center gap-2 text-sm font-medium">
-							<ClipboardCheck className="size-4 text-muted-foreground" />
-							Output
-						</div>
-						<span className="text-xs text-muted-foreground">{outputStats}</span>
-					</div>
-
+				<ToolPanel title="Output" icon={ClipboardCheck} action={<span className="text-xs text-muted-foreground">{outputStats}</span>} enableFullscreen>
 					<CodeEditor value={output} onChange={setOutput} readOnly />
-				</div>
+				</ToolPanel>
 			</div>
 		</div>
 	);
