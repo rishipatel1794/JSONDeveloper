@@ -38,7 +38,7 @@ export function ToolCard({ tool }: ToolCardProps) {
 
 	if (!tool.available) {
 		return (
-			<div className="rounded-lg border border-border-subtle bg-card p-4 opacity-70" aria-disabled="true">
+			<div className="block rounded-lg border border-border-subtle bg-card p-4 opacity-70" aria-disabled="true">
 				{content}
 			</div>
 		);
@@ -48,7 +48,7 @@ export function ToolCard({ tool }: ToolCardProps) {
 		<Link
 			href={tool.href}
 			className={cn(
-				"group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-elevated",
+				"group block rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-elevated",
 				"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 			)}
 		>

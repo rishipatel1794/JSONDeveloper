@@ -5,6 +5,7 @@ import { createToolMetadata } from "@/lib/seo";
 import { JwtDecoder } from "@/components/tools/jwt-decoder/JwtDecoder";
 import { JwtFaq } from "@/components/tools/jwt-decoder/JwtFaq";
 import { JwtSeoContent } from "@/components/tools/jwt-decoder/JwtSeoContent";
+import { ToolPageContainer } from "@/components/tools/shared/ToolPageContainer";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 
 export const metadata = createToolMetadata({
@@ -18,7 +19,7 @@ export const metadata = createToolMetadata({
 export default function JwtDecoderPage() {
 	return (
 		<main>
-			<div className="container mx-auto max-w-7xl px-4 py-10">
+			<ToolPageContainer wide>
 				<ToolPageHeader
 					icon={KeyRound}
 					title="JWT Decoder"
@@ -28,7 +29,7 @@ export default function JwtDecoderPage() {
 				<Suspense fallback={null}>
 					<JwtDecoder />
 				</Suspense>
-			</div>
+			</ToolPageContainer>
 
 			<JwtSeoContent />
 			<JwtFaq />

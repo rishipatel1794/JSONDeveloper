@@ -1,6 +1,7 @@
 import { FileCode2 } from "lucide-react";
 
 import { createToolMetadata } from "@/lib/seo";
+import { ToolPageContainer } from "@/components/tools/shared/ToolPageContainer";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { JsonToCodeTool } from "@/components/tools/json-codegen/JsonToCodeTool";
 import { CODEGEN_EXAMPLE_JSON } from "@/lib/tools/json-codegen/example";
@@ -14,10 +15,12 @@ export const metadata = createToolMetadata({
 
 export default function JsonToJavaPage() {
 	return (
-		<main className="container mx-auto max-w-7xl px-4 py-10">
-			<ToolPageHeader icon={FileCode2} title="JSON to Java" description="Generate Java classes from JSON, entirely in your browser." />
+		<main>
+			<ToolPageContainer wide>
+				<ToolPageHeader icon={FileCode2} title="JSON to Java" description="Generate Java classes from JSON, entirely in your browser." />
 
-			<JsonToCodeTool target="java" rootNameLabel="Root class name" exampleJson={CODEGEN_EXAMPLE_JSON} />
+				<JsonToCodeTool target="java" rootNameLabel="Root class name" exampleJson={CODEGEN_EXAMPLE_JSON} />
+			</ToolPageContainer>
 		</main>
 	);
 }

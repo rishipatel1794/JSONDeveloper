@@ -5,6 +5,7 @@ import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { CodeDiff } from "@/components/tools/code-diff/CodeDiff";
 import { CodeDiffFaq } from "@/components/tools/code-diff/CodeDiffFaq";
 import { CodeDiffSeoContent } from "@/components/tools/code-diff/CodeDiffSeoContent";
+import { ToolPageContainer } from "@/components/tools/shared/ToolPageContainer";
 
 export const metadata = createToolMetadata({
 	title: "Code Diff - Compare Code Changes",
@@ -16,11 +17,11 @@ export const metadata = createToolMetadata({
 export default function CodeDiffPage() {
 	return (
 		<main>
-			<div className="container mx-auto max-w-7xl px-4 py-10">
+			<ToolPageContainer wide>
 				<ToolPageHeader icon={GitCompare} title="Code Diff" description="Compare two versions of your code and see exactly what changed." />
 
 				<CodeDiff />
-			</div>
+			</ToolPageContainer>
 
 			<CodeDiffSeoContent />
 			<CodeDiffFaq />

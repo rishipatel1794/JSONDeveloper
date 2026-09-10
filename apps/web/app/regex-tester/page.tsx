@@ -4,6 +4,7 @@ import { createToolMetadata } from "@/lib/seo";
 import { RegexFaq } from "@/components/tools/regex-tester/RegexFaq";
 import { RegexSeoContent } from "@/components/tools/regex-tester/RegexSeoContent";
 import { RegexTester } from "@/components/tools/regex-tester/RegexTester";
+import { ToolPageContainer } from "@/components/tools/shared/ToolPageContainer";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 
 export const metadata = createToolMetadata({
@@ -17,7 +18,7 @@ export const metadata = createToolMetadata({
 export default function RegexTesterPage() {
 	return (
 		<main>
-			<div className="container mx-auto max-w-7xl px-4 py-10">
+			<ToolPageContainer>
 				<ToolPageHeader
 					icon={Regex}
 					title="Regex Tester"
@@ -25,7 +26,7 @@ export default function RegexTesterPage() {
 				/>
 
 				<RegexTester />
-			</div>
+			</ToolPageContainer>
 
 			<RegexSeoContent />
 			<RegexFaq />

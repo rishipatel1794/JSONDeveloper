@@ -1,6 +1,7 @@
 import { ShieldCheck } from "lucide-react";
 
 import { createToolMetadata } from "@/lib/seo";
+import { ToolPageContainer } from "@/components/tools/shared/ToolPageContainer";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { JsonValidator } from "@/components/tools/json-validator/JsonValidator";
 import { JsonValidatorFaq } from "@/components/tools/json-validator/JsonValidatorFaq";
@@ -17,7 +18,7 @@ export const metadata = createToolMetadata({
 export default function JsonValidatorPage() {
 	return (
 		<main>
-			<div className="container mx-auto max-w-7xl px-4 py-10">
+			<ToolPageContainer wide>
 				<ToolPageHeader
 					icon={ShieldCheck}
 					title="JSON Validator"
@@ -25,7 +26,7 @@ export default function JsonValidatorPage() {
 				/>
 
 				<JsonValidator />
-			</div>
+			</ToolPageContainer>
 
 			<JsonValidatorSeoContent />
 			<JsonValidatorFaq />

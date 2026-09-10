@@ -1,6 +1,7 @@
 import { FileJson2 } from "lucide-react";
 
 import { createToolMetadata } from "@/lib/seo";
+import { ToolPageContainer } from "@/components/tools/shared/ToolPageContainer";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 
 import { JsonFormatter } from "../../components/tools/json-formatter/JsonFormatter";
@@ -14,14 +15,16 @@ export const metadata = createToolMetadata({
 
 export default function JsonFormatterPage() {
 	return (
-		<main className="container mx-auto max-w-7xl px-4 py-10">
-			<ToolPageHeader
-				icon={FileJson2}
-				title="JSON Formatter"
-				description="Format, validate, minify, and download JSON directly in your browser."
-			/>
+		<main>
+			<ToolPageContainer wide>
+				<ToolPageHeader
+					icon={FileJson2}
+					title="JSON Formatter"
+					description="Format, validate, minify, and download JSON directly in your browser."
+				/>
 
-			<JsonFormatter />
+				<JsonFormatter />
+			</ToolPageContainer>
 		</main>
 	);
 }

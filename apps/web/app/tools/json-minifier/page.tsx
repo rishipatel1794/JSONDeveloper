@@ -1,6 +1,7 @@
 import { Braces } from "lucide-react";
 
 import { createToolMetadata } from "@/lib/seo";
+import { ToolPageContainer } from "@/components/tools/shared/ToolPageContainer";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { JsonMinifier } from "@/components/tools/json-minifier/JsonMinifier";
 
@@ -13,10 +14,12 @@ export const metadata = createToolMetadata({
 
 export default function JsonMinifierPage() {
 	return (
-		<main className="container mx-auto max-w-7xl px-4 py-10">
-			<ToolPageHeader icon={Braces} title="JSON Minifier" description="Compress JSON by removing whitespace, entirely in your browser." />
+		<main>
+			<ToolPageContainer wide>
+				<ToolPageHeader icon={Braces} title="JSON Minifier" description="Compress JSON by removing whitespace, entirely in your browser." />
 
-			<JsonMinifier />
+				<JsonMinifier />
+			</ToolPageContainer>
 		</main>
 	);
 }

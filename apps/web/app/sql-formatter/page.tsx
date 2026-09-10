@@ -4,6 +4,7 @@ import { createToolMetadata } from "@/lib/seo";
 import { SqlFaq } from "@/components/tools/sql-formatter/SqlFaq";
 import { SqlFormatter } from "@/components/tools/sql-formatter/SqlFormatter";
 import { SqlSeoContent } from "@/components/tools/sql-formatter/SqlSeoContent";
+import { ToolPageContainer } from "@/components/tools/shared/ToolPageContainer";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 
 export const metadata = createToolMetadata({
@@ -17,7 +18,7 @@ export const metadata = createToolMetadata({
 export default function SqlFormatterPage() {
 	return (
 		<main>
-			<div className="container mx-auto max-w-7xl px-4 py-10">
+			<ToolPageContainer wide>
 				<ToolPageHeader
 					icon={Database}
 					title="SQL Formatter"
@@ -25,7 +26,7 @@ export default function SqlFormatterPage() {
 				/>
 
 				<SqlFormatter />
-			</div>
+			</ToolPageContainer>
 
 			<SqlSeoContent />
 			<SqlFaq />
