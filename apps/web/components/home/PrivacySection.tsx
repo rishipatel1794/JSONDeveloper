@@ -2,7 +2,7 @@ import { ArrowRight, FileJson2, Laptop, MonitorSmartphone, Sparkles } from "luci
 
 const FLOW = [
 	{ icon: FileJson2, label: "Your data" },
-	{ icon: MonitorSmartphone, label: "Your browser" },
+	{ icon: MonitorSmartphone, label: "Browser" },
 	{ icon: Laptop, label: "Tool" },
 	{ icon: Sparkles, label: "Result" },
 ];
@@ -12,7 +12,8 @@ export function PrivacySection() {
 		<section className="border-b border-border bg-muted/40">
 			<div className="container mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:py-20 lg:grid-cols-2">
 				<div>
-					<h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Your data stays in your browser</h2>
+					<p className="font-mono text-xs font-semibold tracking-widest text-primary">LOCAL PROCESSING</p>
+					<h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Your data stays in your browser</h2>
 
 					<p className="mt-4 text-muted-foreground">
 						Many of our tools process data locally, meaning your JSON, tokens, and text don&apos;t need to leave your
@@ -25,7 +26,7 @@ export function PrivacySection() {
 					{FLOW.map((step, index) => (
 						<div key={step.label} className="flex items-center gap-3 sm:flex-col sm:gap-2">
 							<div className="flex flex-col items-center gap-2 sm:flex-row">
-								<span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+								<span className="flex size-10 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-primary">
 									<step.icon className="size-5" />
 								</span>
 								<span className="text-sm font-medium text-foreground">{step.label}</span>

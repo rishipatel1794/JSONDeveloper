@@ -2,42 +2,54 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Braces, Menu, X } from "lucide-react";
 
 import { productConfig } from "@repo/config";
 
+import { cn } from "@/lib/utils";
 import { GitHubIcon } from "@/components/icons/GitHubIcon";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV_LINKS = [
 	{ label: "Tools", href: "/#popular-tools" },
 	{ label: "Categories", href: "/#categories" },
-	{ label: "Docs", href: "/#faq" },
+	{ label: "Developer Guides", href: "/developer-guides" },
+	{ label: "Blog", href: "/blog" },
 ];
 
 export function Navbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const pathname = usePathname();
 
 	return (
 		<header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
 			<div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
 				<Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-foreground">
-					<span className="flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary">
-						<Braces className="size-5" />
+					<span className="flex size-8 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-primary">
+						<Braces className="size-4" />
 					</span>
 					{productConfig.name}
 				</Link>
 
 				<nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
-					{NAV_LINKS.map(link => (
-						<Link
-							key={link.href}
-							href={link.href}
-							className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-						>
-							{link.label}
-						</Link>
-					))}
+					{NAV_LINKS.map(link => {
+						const isActive = !link.href.includes("#") && pathname?.startsWith(link.href);
+
+						return (
+							<Link
+								key={link.href}
+								href={link.href}
+								aria-current={isActive ? "page" : undefined}
+								className={cn(
+									"rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary hover:text-foreground",
+									isActive ? "text-primary" : "text-muted-foreground",
+								)}
+							>
+								{link.label}
+							</Link>
+						);
+					})}
 				</nav>
 
 				<div className="flex items-center gap-1">

@@ -1,76 +1,81 @@
 import type { Metadata } from "next";
 
-import { absoluteUrl, createPageMetadata, siteDescription, siteName } from "@/lib/seo";
+import { absoluteUrl, createPageMetadata, siteName } from "@/lib/seo";
 
 import { CTA } from "@/components/home/CTA";
-import { DeveloperWorkflow } from "@/components/home/DeveloperWorkflow";
-import { FAQ } from "@/components/home/FAQ";
-import { FeaturedTools } from "@/components/home/FeaturedTools";
+import { DeveloperGuidesSection } from "@/components/home/DeveloperGuidesSection";
+import { FAQ, HOMEPAGE_FAQ_ITEMS } from "@/components/home/FAQ";
 import { Hero } from "@/components/home/Hero";
 import { PopularTools } from "@/components/home/PopularTools";
 import { PrivacySection } from "@/components/home/PrivacySection";
+import { RecentlyAdded } from "@/components/home/RecentlyAdded";
 import { SeoContent } from "@/components/home/SeoContent";
 import { ToolCategories } from "@/components/home/ToolCategories";
+import { ToolkitSection } from "@/components/home/ToolkitSection";
+import { ToolWorkflows } from "@/components/home/ToolWorkflows";
 import { WhyDevelopers } from "@/components/home/WhyDevelopers";
 
+const TITLE = `${siteName} | Free Online Developer Tools`;
+const DESCRIPTION =
+	"Fast and free online developer tools for JSON, APIs, regex, SQL, web development, and DevOps. Format, validate, convert, generate, and debug without complicated setup.";
+
 export const metadata: Metadata = createPageMetadata({
-	title: `${siteName} | Online Developer Tools`,
-	description: siteDescription,
+	title: TITLE,
+	description: DESCRIPTION,
 	path: "/",
-	keywords: ["browser-based tools", "developer productivity", "privacy-friendly tools"],
+	keywords: ["online developer tools", "free developer tools", "json tools", "api tools", "devops tools"],
 });
 
 export default function Home() {
 	const webpageJsonLd = {
 		"@context": "https://schema.org",
 		"@type": "WebPage",
-		name: `${siteName} | Online Developer Tools`,
-		description: siteDescription,
+		name: TITLE,
+		description: DESCRIPTION,
 		url: absoluteUrl("/"),
 	};
 
 	const faqJsonLd = {
 		"@context": "https://schema.org",
 		"@type": "FAQPage",
-		mainEntity: [
-			{
-				"@type": "Question",
-				name: "Are these developer tools free?",
-				acceptedAnswer: {
-					"@type": "Answer",
-					text: "Yes. The core developer tools are free to use with no account required.",
-				},
+		mainEntity: HOMEPAGE_FAQ_ITEMS.map(item => ({
+			"@type": "Question",
+			name: item.question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: item.answer,
 			},
-			{
-				"@type": "Question",
-				name: "Do I need to install anything?",
-				acceptedAnswer: {
-					"@type": "Answer",
-					text: "No installation is needed. Every tool runs directly in your browser.",
-				},
-			},
-			{
-				"@type": "Question",
-				name: "Is my data uploaded?",
-				acceptedAnswer: {
-					"@type": "Answer",
-					text: "Many tools support local processing in your browser, reducing the need to send data to a server.",
-				},
-			},
-		],
+		})),
 	};
 
 	return (
 		<main>
 			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }} />
 			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+
 			<Hero />
 			<PopularTools />
 			<ToolCategories />
-			<WhyDevelopers />
-			<FeaturedTools />
-			<DeveloperWorkflow />
+			<ToolWorkflows />
+			<RecentlyAdded />
+			<ToolkitSection
+				category="json"
+				title="JSON developer toolkit"
+				subtitle="Format, validate, minify, and convert JSON without leaving your browser."
+				exploreLabel="Explore all JSON tools"
+				eyebrow={{ index: 4, label: "JSON TOOLKIT" }}
+			/>
+			<ToolkitSection
+				category="devops"
+				title="DevOps tools"
+				subtitle="Generate configuration files and schedules faster."
+				exploreLabel="Explore all DevOps tools"
+				muted
+				accent="info"
+			/>
 			<PrivacySection />
+			<WhyDevelopers />
+			<DeveloperGuidesSection />
 			<SeoContent />
 			<FAQ />
 			<CTA />

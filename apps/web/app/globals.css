@@ -11,7 +11,7 @@
   --border: #272a32;
   --border-subtle: #1d2027;
   --input: #272a32;
-  --ring: #3b82f6;
+  --ring: #2dd4bf;
 
   /* Text */
   --foreground: #f4f4f5;
@@ -19,11 +19,12 @@
   --muted-foreground: #a1a1aa;
   --subtle-foreground: #71717a;
 
-  /* Brand */
-  --primary: #3b82f6;
-  --primary-hover: #2563eb;
-  --primary-accent: #60a5fa;
-  --primary-foreground: #ffffff;
+  /* Brand — a terminal-inspired teal, deliberately distinct in hue from --success (a warmer green)
+     so a primary action and a "this worked" status are never the same color. */
+  --primary: #2dd4bf;
+  --primary-hover: #14b8a6;
+  --primary-accent: #5eead4;
+  --primary-foreground: #052e2b;
 
   /* Secondary surface (buttons, panel bars) */
   --secondary: #171a21;
@@ -60,16 +61,16 @@
   --border: #e2e8f0;
   --border-subtle: #eef2f6;
   --input: #e2e8f0;
-  --ring: #2563eb;
+  --ring: #0d9488;
 
   --foreground: #0f172a;
   --card-foreground: #0f172a;
   --muted-foreground: #64748b;
   --subtle-foreground: #94a3b8;
 
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-accent: #3b82f6;
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --primary-accent: #0f766e;
   --primary-foreground: #ffffff;
 
   --secondary: #f1f5f9;

@@ -37,6 +37,11 @@ export interface ToolDefinition {
 	icon: LucideIcon;
 	popular?: boolean;
 	available?: boolean;
+	/** Extra search terms beyond name/description — synonyms, abbreviations, related concepts. */
+	keywords?: string[];
+	/** Marks a tool for the "Recently added" section — only while `newUntil` (an ISO date) hasn't passed. */
+	isNew?: boolean;
+	newUntil?: string;
 }
 
 export const categories: CategoryDefinition[] = [
@@ -84,6 +89,9 @@ export const categories: CategoryDefinition[] = [
 	},
 ];
 
+/** How long a tool marked `isNew` keeps showing in "Recently added" once shipped. */
+const NEW_TOOL_WINDOW = "2026-11-09";
+
 const allTools: ToolDefinition[] = [
 	// JSON
 	{
@@ -95,6 +103,7 @@ const allTools: ToolDefinition[] = [
 		icon: Braces,
 		popular: true,
 		available: true,
+		keywords: ["json", "formatter", "beautifier", "pretty print", "format json"],
 	},
 	{
 		name: "JSON Validator",
@@ -105,6 +114,7 @@ const allTools: ToolDefinition[] = [
 		icon: ShieldCheck,
 		popular: true,
 		available: true,
+		keywords: ["json", "validator", "json schema", "lint", "syntax error"],
 	},
 	{
 		name: "JSON Minifier",
@@ -114,6 +124,7 @@ const allTools: ToolDefinition[] = [
 		category: "json",
 		icon: Braces,
 		available: true,
+		keywords: ["json", "minify", "minifier", "compress json"],
 	},
 	{
 		name: "JSON to TypeScript",
@@ -123,6 +134,7 @@ const allTools: ToolDefinition[] = [
 		category: "json",
 		icon: FileCode2,
 		available: true,
+		keywords: ["json", "typescript", "interface", "types", "json to ts"],
 	},
 	{
 		name: "JSON to Zod",
@@ -132,6 +144,7 @@ const allTools: ToolDefinition[] = [
 		category: "json",
 		icon: FileCode2,
 		available: true,
+		keywords: ["json", "zod", "schema", "validation schema"],
 	},
 	{
 		name: "JSON to Python",
@@ -141,6 +154,7 @@ const allTools: ToolDefinition[] = [
 		category: "json",
 		icon: FileCode2,
 		available: true,
+		keywords: ["json", "python", "dataclass", "pydantic"],
 	},
 	{
 		name: "JSON to PHP",
@@ -150,6 +164,7 @@ const allTools: ToolDefinition[] = [
 		category: "json",
 		icon: FileCode2,
 		available: true,
+		keywords: ["json", "php", "class", "array"],
 	},
 	{
 		name: "JSON to Java",
@@ -159,6 +174,7 @@ const allTools: ToolDefinition[] = [
 		category: "json",
 		icon: FileCode2,
 		available: true,
+		keywords: ["json", "java", "pojo", "class"],
 	},
 
 	// API
@@ -171,6 +187,7 @@ const allTools: ToolDefinition[] = [
 		icon: Send,
 		popular: true,
 		available: true,
+		keywords: ["api", "http", "rest", "postman", "request", "client"],
 	},
 	{
 		name: "JWT Decoder",
@@ -181,6 +198,7 @@ const allTools: ToolDefinition[] = [
 		icon: KeyRound,
 		popular: true,
 		available: true,
+		keywords: ["jwt", "json web token", "decode", "token", "auth"],
 	},
 	{
 		name: "JWT Generator",
@@ -189,6 +207,7 @@ const allTools: ToolDefinition[] = [
 		description: "Create signed JSON Web Tokens for testing.",
 		category: "api",
 		icon: KeyRound,
+		keywords: ["jwt", "token", "generate", "sign"],
 	},
 	{
 		name: "cURL Generator",
@@ -199,6 +218,7 @@ const allTools: ToolDefinition[] = [
 		icon: Terminal,
 		popular: true,
 		available: true,
+		keywords: ["curl", "command", "http request", "terminal"],
 	},
 	{
 		name: "HTTP Status Code Reference",
@@ -207,6 +227,7 @@ const allTools: ToolDefinition[] = [
 		description: "Look up what each HTTP status code means.",
 		category: "api",
 		icon: KeyRound,
+		keywords: ["http", "status code", "reference", "404", "500"],
 	},
 	{
 		name: "API Response Formatter",
@@ -215,6 +236,7 @@ const allTools: ToolDefinition[] = [
 		description: "Pretty-print and inspect API responses.",
 		category: "api",
 		icon: KeyRound,
+		keywords: ["api", "response", "format", "pretty print"],
 	},
 
 	// Regex
@@ -227,6 +249,7 @@ const allTools: ToolDefinition[] = [
 		icon: Regex,
 		popular: true,
 		available: true,
+		keywords: ["regex", "regular expression", "pattern", "match", "test"],
 	},
 	{
 		name: "Regex Generator",
@@ -235,6 +258,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate a regex pattern from examples.",
 		category: "regex",
 		icon: Regex,
+		keywords: ["regex", "generate", "pattern from example"],
 	},
 	{
 		name: "Regex Explainer",
@@ -243,6 +267,7 @@ const allTools: ToolDefinition[] = [
 		description: "Get a plain-English breakdown of a regex.",
 		category: "regex",
 		icon: Regex,
+		keywords: ["regex", "explain", "breakdown"],
 	},
 
 	// Database
@@ -255,6 +280,7 @@ const allTools: ToolDefinition[] = [
 		icon: Database,
 		popular: true,
 		available: true,
+		keywords: ["sql", "query", "format", "beautify"],
 	},
 	{
 		name: "SQL Validator",
@@ -263,6 +289,7 @@ const allTools: ToolDefinition[] = [
 		description: "Check SQL syntax for errors.",
 		category: "database",
 		icon: Database,
+		keywords: ["sql", "validate", "syntax"],
 	},
 	{
 		name: "JSON to SQL",
@@ -271,6 +298,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate SQL insert statements from JSON.",
 		category: "database",
 		icon: Database,
+		keywords: ["json", "sql", "insert", "convert"],
 	},
 	{
 		name: "SQL Explainer",
@@ -279,6 +307,7 @@ const allTools: ToolDefinition[] = [
 		description: "Get a plain-English breakdown of a SQL query.",
 		category: "database",
 		icon: Database,
+		keywords: ["sql", "explain", "query breakdown"],
 	},
 
 	// Web
@@ -289,6 +318,7 @@ const allTools: ToolDefinition[] = [
 		description: "Percent-encode URLs and query strings.",
 		category: "web",
 		icon: Globe,
+		keywords: ["url", "encode", "percent encoding"],
 	},
 	{
 		name: "URL Decoder",
@@ -297,6 +327,7 @@ const allTools: ToolDefinition[] = [
 		description: "Decode percent-encoded URLs.",
 		category: "web",
 		icon: Globe,
+		keywords: ["url", "decode"],
 	},
 	{
 		name: "HTML Formatter",
@@ -305,6 +336,7 @@ const allTools: ToolDefinition[] = [
 		description: "Format and beautify HTML markup.",
 		category: "web",
 		icon: Code2,
+		keywords: ["html", "format", "beautify"],
 	},
 	{
 		name: "CSS Formatter",
@@ -313,6 +345,7 @@ const allTools: ToolDefinition[] = [
 		description: "Format and beautify CSS stylesheets.",
 		category: "web",
 		icon: Code2,
+		keywords: ["css", "format", "beautify"],
 	},
 	{
 		name: "JavaScript Formatter",
@@ -321,6 +354,7 @@ const allTools: ToolDefinition[] = [
 		description: "Format and beautify JavaScript code.",
 		category: "web",
 		icon: Code2,
+		keywords: ["javascript", "js", "format", "beautify"],
 	},
 
 	// Utilities
@@ -331,6 +365,7 @@ const allTools: ToolDefinition[] = [
 		description: "Encode text or files to Base64.",
 		category: "utilities",
 		icon: Fingerprint,
+		keywords: ["base64", "encode"],
 	},
 	{
 		name: "Base64 Decoder",
@@ -339,6 +374,7 @@ const allTools: ToolDefinition[] = [
 		description: "Decode Base64 back to text or files.",
 		category: "utilities",
 		icon: Fingerprint,
+		keywords: ["base64", "decode"],
 	},
 	{
 		name: "UUID Generator",
@@ -347,6 +383,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate v4 UUIDs in bulk.",
 		category: "utilities",
 		icon: Fingerprint,
+		keywords: ["uuid", "guid", "generate", "unique id"],
 	},
 	{
 		name: "Timestamp Converter",
@@ -357,6 +394,7 @@ const allTools: ToolDefinition[] = [
 		icon: CalendarClock,
 		popular: true,
 		available: true,
+		keywords: ["timestamp", "unix", "epoch", "date", "time"],
 	},
 	{
 		name: "Hash Generator",
@@ -365,6 +403,7 @@ const allTools: ToolDefinition[] = [
 		description: "Generate MD5, SHA-1, and SHA-256 hashes.",
 		category: "utilities",
 		icon: Fingerprint,
+		keywords: ["hash", "md5", "sha1", "sha256", "checksum"],
 	},
 	{
 		name: "Code Diff",
@@ -375,6 +414,7 @@ const allTools: ToolDefinition[] = [
 		icon: GitCompare,
 		popular: true,
 		available: true,
+		keywords: ["diff", "compare code", "code comparison", "git diff"],
 	},
 	{
 		name: "Text Diff",
@@ -383,6 +423,7 @@ const allTools: ToolDefinition[] = [
 		description: "Compare two blocks of text side by side.",
 		category: "utilities",
 		icon: Wrench,
+		keywords: ["diff", "text compare"],
 	},
 
 	// DevOps
@@ -393,6 +434,11 @@ const allTools: ToolDefinition[] = [
 		description: "Build cron expressions from a schedule.",
 		category: "devops",
 		icon: Terminal,
+		popular: true,
+		available: true,
+		isNew: true,
+		newUntil: NEW_TOOL_WINDOW,
+		keywords: ["cron", "crontab", "schedule", "cron expression", "cron job"],
 	},
 	{
 		name: "Cron Parser",
@@ -401,6 +447,10 @@ const allTools: ToolDefinition[] = [
 		description: "Explain what a cron expression does.",
 		category: "devops",
 		icon: Terminal,
+		available: true,
+		isNew: true,
+		newUntil: NEW_TOOL_WINDOW,
+		keywords: ["cron", "crontab", "explain", "parse", "cron expression"],
 	},
 	{
 		name: ".htaccess Generator",
@@ -409,6 +459,10 @@ const allTools: ToolDefinition[] = [
 		description: "Generate Apache .htaccess rules.",
 		category: "devops",
 		icon: Container,
+		available: true,
+		isNew: true,
+		newUntil: NEW_TOOL_WINDOW,
+		keywords: ["htaccess", "apache", "rewrite", "redirect"],
 	},
 	{
 		name: "Nginx Config Generator",
@@ -417,6 +471,10 @@ const allTools: ToolDefinition[] = [
 		description: "Generate Nginx server block configs.",
 		category: "devops",
 		icon: Container,
+		available: true,
+		isNew: true,
+		newUntil: NEW_TOOL_WINDOW,
+		keywords: ["nginx", "server block", "reverse proxy", "config"],
 	},
 	{
 		name: "Docker Compose Generator",
@@ -425,16 +483,23 @@ const allTools: ToolDefinition[] = [
 		description: "Generate docker-compose.yml files.",
 		category: "devops",
 		icon: Container,
+		available: true,
+		isNew: true,
+		newUntil: NEW_TOOL_WINDOW,
+		keywords: ["docker", "docker compose", "compose", "yaml", "container"],
 	},
 ];
 
 export const isProductionAppMode = productConfig.isProduction;
 
-export const tools: ToolDefinition[] = isProductionAppMode
-	? allTools.filter(tool => tool.available)
-	: allTools;
+export const tools: ToolDefinition[] = isProductionAppMode ? allTools.filter(tool => tool.available) : allTools;
 
 export const popularTools = tools.filter(tool => tool.popular);
+
+/** Tools flagged `isNew` whose `newUntil` date (if set) hasn't passed yet. */
+export function getNewTools(now: Date = new Date()): ToolDefinition[] {
+	return tools.filter(tool => tool.isNew && (!tool.newUntil || new Date(tool.newUntil) > now));
+}
 
 export function getToolsByCategory(category: CategorySlug): ToolDefinition[] {
 	return tools.filter(tool => tool.category === category);
@@ -446,4 +511,8 @@ export function getCategoryToolCount(category: CategorySlug): number {
 
 export function getCategory(slug: CategorySlug): CategoryDefinition | undefined {
 	return categories.find(category => category.slug === slug);
+}
+
+export function getToolBySlug(slug: string): ToolDefinition | undefined {
+	return tools.find(tool => tool.slug === slug);
 }

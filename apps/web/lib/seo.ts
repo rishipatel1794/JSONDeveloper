@@ -97,3 +97,32 @@ export function getOrganizationJsonLd() {
 		...(sameAs.length > 0 ? { sameAs } : {}),
 	};
 }
+
+interface ToolJsonLdInput {
+	name: string;
+	description: string;
+	path: string;
+}
+
+/** WebApplication structured data for a free, browser-based tool page — no ratings/reviews/pricing, since none of that exists. */
+export function getToolJsonLd({ name, description, path }: ToolJsonLdInput) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "WebApplication",
+		name,
+		description,
+		url: absoluteUrl(path),
+		applicationCategory: "DeveloperApplication",
+		operatingSystem: "Any (runs in a web browser)",
+		offers: {
+			"@type": "Offer",
+			price: "0",
+			priceCurrency: "USD",
+		},
+		isPartOf: {
+			"@type": "WebSite",
+			name: siteName,
+			url: siteUrl,
+		},
+	};
+}

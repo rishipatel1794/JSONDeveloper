@@ -1,5 +1,3 @@
-import { productConfig } from "@repo/config";
-
 import { Button } from "@/components/ui/Button";
 
 import { ToolSearch } from "./ToolSearch";
@@ -17,8 +15,8 @@ export function Hero() {
 				</h1>
 
 				<p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-					{productConfig.description}. Fast, free, and privacy-friendly utilities for JSON, APIs, SQL, regex, web development,
-					and DevOps — no setup, no complicated workflows.
+					Fast, free online tools for JSON, APIs, code, databases, web development, and DevOps — no setup, no complicated
+					workflows.
 				</p>
 
 				<div className="mt-8">

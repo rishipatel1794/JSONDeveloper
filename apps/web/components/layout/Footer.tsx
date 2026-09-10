@@ -17,14 +17,13 @@ const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
 			{ label: "Tools", href: "/#popular-tools" },
 			{ label: "Categories", href: "/#categories" },
 			{ label: "JSON Formatter", href: "/json-formatter" },
-			{ label: "Documentation", href: "/#faq" },
 		],
 	},
 	{
 		title: "Resources",
 		links: [
-			{ label: "Blog", href: "/blog" },
 			{ label: "Developer Guides", href: "/developer-guides" },
+			{ label: "Blog", href: "/blog" },
 			{ label: "FAQ", href: "/#faq" },
 		],
 	},
@@ -33,6 +32,11 @@ const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
 		links: [
 			{ label: "About", href: "/about" },
 			{ label: "Contact", href: "/contact" },
+		],
+	},
+	{
+		title: "Legal",
+		links: [
 			{ label: "Privacy", href: "/privacy" },
 			{ label: "Terms", href: "/terms" },
 		],
@@ -43,13 +47,15 @@ export function Footer() {
 	const year = new Date().getFullYear();
 
 	return (
-		<footer className="border-t border-border bg-muted">
-			<div className="container mx-auto max-w-7xl px-4 py-12">
-				<div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
-					<div className="lg:col-span-2">
+		<footer className="relative overflow-hidden border-t border-border bg-background">
+			<div className="bg-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
+
+			<div className="container relative mx-auto max-w-7xl px-4 py-12">
+				<div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
+					<div className="sm:col-span-2 lg:col-span-2">
 						<Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-foreground">
-							<span className="flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary">
-								<Braces className="size-5" />
+							<span className="flex size-8 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-primary">
+								<Braces className="size-4" />
 							</span>
 							{productConfig.name}
 						</Link>
@@ -71,7 +77,7 @@ export function Footer() {
 
 					{FOOTER_COLUMNS.map(column => (
 						<div key={column.title}>
-							<h3 className="text-sm font-semibold text-foreground">{column.title}</h3>
+							<h3 className="font-mono text-xs font-semibold tracking-widest text-subtle-foreground">{column.title.toUpperCase()}</h3>
 
 							<ul className="mt-3 space-y-2.5">
 								{column.links.map(link => (
