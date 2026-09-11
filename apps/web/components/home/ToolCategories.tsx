@@ -26,7 +26,7 @@ export function ToolCategories() {
 							<Reveal key={category.slug} delay={index * 60}>
 								<Link
 									href={`/category/${category.slug}`}
-									className="group block rounded-lg border border-border bg-card p-5 transition-colors duration-200 hover:border-primary/50 hover:bg-elevated hover:shadow-[0_0_0_1px_var(--color-primary)_inset]"
+									className="group flex h-full flex-col rounded-lg border border-border bg-card p-5 transition-colors duration-200 hover:border-primary/50 hover:bg-elevated hover:shadow-[0_0_0_1px_var(--color-primary)_inset]"
 								>
 									<span className="flex size-9 items-center justify-center rounded-md bg-primary/10 text-primary transition-transform duration-200 group-hover:scale-110">
 										<Icon className="size-5" />
@@ -35,7 +35,7 @@ export function ToolCategories() {
 									<span className="mt-3 block text-sm font-semibold text-foreground">{category.name}</span>
 									<span className="mt-1 block text-sm text-muted-foreground">{category.description}</span>
 
-									<span className="mt-4 flex items-center justify-between text-sm">
+									<span className="mt-auto flex items-center justify-between pt-4 text-sm">
 										<span className="text-subtle-foreground">
 											<CountUp value={count} /> tool{count === 1 ? "" : "s"}
 										</span>

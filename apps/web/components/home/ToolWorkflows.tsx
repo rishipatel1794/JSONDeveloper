@@ -34,10 +34,10 @@ export function ToolWorkflows() {
 				<div className="mt-10 grid gap-4 lg:grid-cols-2">
 					{workflows.map((workflow, workflowIndex) => (
 						<Reveal key={workflow.title} delay={workflowIndex * 80}>
-							<div className="rounded-lg border border-border bg-card p-5 transition-colors duration-200 hover:border-primary/30">
+							<div className="flex h-full flex-col rounded-lg border border-border bg-card p-5 transition-colors duration-200 hover:border-primary/30">
 								<h3 className="text-sm font-semibold text-foreground">{workflow.title}</h3>
 
-								<div className="mt-3 flex flex-wrap items-center gap-2">
+								<div className="mt-3 flex flex-1 flex-wrap items-center gap-2">
 									{workflow.tools.map((tool, index) => (
 										<div key={tool!.slug} className="flex items-center gap-2">
 											<Link
