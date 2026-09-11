@@ -29,7 +29,7 @@ export function ToolCard({ tool }: ToolCardProps) {
 			<span className="mt-3 block text-sm font-semibold text-foreground">{tool.name}</span>
 			<span className="mt-1 block text-sm text-muted-foreground">{tool.description}</span>
 
-			<span className="mt-4 block font-mono text-[10px] font-medium tracking-widest text-subtle-foreground">
+			<span className="mt-auto block pt-4 font-mono text-[10px] font-medium tracking-widest text-subtle-foreground">
 				{categoryName.toUpperCase()}
 				{!tool.available && <span className="ml-1.5 text-warning">· SOON</span>}
 			</span>
@@ -38,7 +38,7 @@ export function ToolCard({ tool }: ToolCardProps) {
 
 	if (!tool.available) {
 		return (
-			<div className="block rounded-lg border border-border-subtle bg-card p-4 opacity-70" aria-disabled="true">
+			<div className="flex h-full flex-col rounded-lg border border-border-subtle bg-card p-4 opacity-70" aria-disabled="true">
 				{content}
 			</div>
 		);
@@ -48,7 +48,7 @@ export function ToolCard({ tool }: ToolCardProps) {
 		<Link
 			href={tool.href}
 			className={cn(
-				"group block rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-elevated",
+				"group flex h-full flex-col rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-elevated",
 				"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 			)}
 		>
