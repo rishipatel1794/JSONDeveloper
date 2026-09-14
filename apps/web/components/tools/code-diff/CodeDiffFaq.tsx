@@ -1,6 +1,6 @@
 import { Accordion } from "@/components/ui/Accordion";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
 	{
 		question: "How does the Code Diff tool detect changes?",
 		answer:

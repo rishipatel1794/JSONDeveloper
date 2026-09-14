@@ -1,6 +1,6 @@
 import { Accordion } from "@/components/ui/Accordion";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
 	{
 		question: "What is a SQL formatter?",
 		answer:

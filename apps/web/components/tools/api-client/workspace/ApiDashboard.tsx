@@ -34,7 +34,7 @@ export function ApiDashboard({
 		<div className="mx-auto max-w-4xl space-y-8 p-6">
 			<div className="flex items-start justify-between gap-4">
 				<div>
-					<h1 className="text-xl font-semibold text-foreground">Welcome back</h1>
+					<h2 className="text-xl font-semibold text-foreground">Welcome back</h2>
 					<p className="mt-1 text-sm text-muted-foreground">Pick up where you left off, or start something new.</p>
 				</div>
 				<Button onClick={onImportApi} variant="outline" size="sm" className="shrink-0">

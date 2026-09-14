@@ -126,3 +126,24 @@ export function getToolJsonLd({ name, description, path }: ToolJsonLdInput) {
 		},
 	};
 }
+
+export interface FaqItem {
+	question: string;
+	answer: string;
+}
+
+/** FAQPage structured data — pass the exact same array a page's Faq component renders, so schema never drifts from visible content. */
+export function getFaqJsonLd(items: readonly FaqItem[]) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: items.map(item => ({
+			"@type": "Question",
+			name: item.question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: item.answer,
+			},
+		})),
+	};
+}
