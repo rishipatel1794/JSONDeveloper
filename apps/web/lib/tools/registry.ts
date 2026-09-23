@@ -10,6 +10,7 @@ import {
 	Globe,
 	KeyRound,
 	Regex,
+	ScanText,
 	Send,
 	ShieldCheck,
 	Terminal,
@@ -175,6 +176,18 @@ const allTools: ToolDefinition[] = [
 		icon: FileCode2,
 		available: true,
 		keywords: ["json", "java", "pojo", "class"],
+	},
+	{
+		name: "OCR to JSON",
+		slug: "ocr-to-json",
+		href: "/tools/ocr-to-json",
+		description: "Convert an OCR/document-parsing response into structured JSON.",
+		category: "json",
+		icon: ScanText,
+		available: true,
+		isNew: true,
+		newUntil: NEW_TOOL_WINDOW,
+		keywords: ["ocr", "paddleocr", "ocr to json", "document parsing", "ocr markdown", "key value extraction"],
 	},
 
 	// API
