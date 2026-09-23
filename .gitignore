@@ -21,6 +21,9 @@ coverage
 # Vercel
 .vercel
 
+# Wrangler (Cloudflare Workers local dev state/cache)
+.wrangler
+
 # Build Outputs
 .next/
 out/

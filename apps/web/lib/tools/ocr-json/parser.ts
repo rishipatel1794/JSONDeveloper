@@ -88,10 +88,13 @@ export function parseOcrTextToTable(markdown: string): { table: OcrKeyValueRow[]
 		if (pendingKey !== null) {
 			const [value, ...rest] = lines;
 			table.push({ key: pendingKey, value: value ?? "" });
-			unlabeled.push(...rest);
+			// A loop rather than `unlabeled.push(...rest)` — spreading a large array as call arguments
+			// hits V8's argument-count limit ("Maximum call stack size exceeded") well before any real
+			// recursion depth, and multi-page OCR responses routinely produce line arrays that large.
+			for (const line of rest) unlabeled.push(line);
 			pendingKey = null;
 		} else {
-			unlabeled.push(...lines);
+			for (const line of lines) unlabeled.push(line);
 		}
 	}
 
