@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AlertCircle, ScanText, Table2 } from "lucide-react";
+import { AlertCircle, FileCode2, ScanText, Table2 } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { CopyButton } from "@/components/ui/CopyButton";
@@ -10,6 +10,7 @@ import { ToolPanel } from "@/components/tools/shared/ToolPanel";
 import { downloadTextFile } from "@/lib/download";
 import { convertOcrResponseToJson } from "@/lib/tools/ocr-json/parser";
 import { OCR_EXAMPLE_RESPONSE } from "@/lib/tools/ocr-json/example";
+import { OCR_TO_JSON_PYTHON_CODE } from "@/lib/tools/ocr-json/pythonCode";
 
 export function OcrToJson() {
 	const [input, setInput] = useState("");
@@ -92,6 +93,27 @@ export function OcrToJson() {
 					<CodeEditor value={output} onChange={() => {}} language="json" readOnly placeholder="Structured JSON will appear here" />
 				</ToolPanel>
 			</div>
+
+			<ToolPanel
+				title="Python Implementation"
+				icon={FileCode2}
+				enableFullscreen
+				action={
+					<div className="flex items-center gap-2">
+						<CopyButton value={OCR_TO_JSON_PYTHON_CODE} ariaLabel="Copy Python code" />
+						<Button onClick={() => downloadTextFile(OCR_TO_JSON_PYTHON_CODE, "ocr_to_json.py", "text/x-python")} variant="outline" size="sm">
+							Download
+						</Button>
+					</div>
+				}
+			>
+				<CodeEditor value={OCR_TO_JSON_PYTHON_CODE} onChange={() => {}} language="python" readOnly height="420px" />
+			</ToolPanel>
+
+			<p className="text-sm text-muted-foreground">
+				Run this same conversion natively in your own OCR pipeline (e.g. right after <code className="rounded bg-secondary px-1 py-0.5 font-mono text-xs">PaddleOCR().ocr(...)</code>) instead
+				of pasting the response here each time — the logic is identical to what runs above.
+			</p>
 		</div>
 	);
 }
