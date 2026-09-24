@@ -5,7 +5,7 @@ const BLOCKED_HOSTNAMES = new Set([
   "ip6-loopback",
 ]);
 
-function isIPv4PrivateOrReserved(ip: string): boolean {
+export function isIPv4PrivateOrReserved(ip: string): boolean {
   const parts = ip.split(".").map(Number);
 
   if (
@@ -29,7 +29,7 @@ function isIPv4PrivateOrReserved(ip: string): boolean {
   return false;
 }
 
-function isIPv6PrivateOrReserved(ip: string): boolean {
+export function isIPv6PrivateOrReserved(ip: string): boolean {
   const normalized = ip.toLowerCase();
 
   if (normalized === "::" || normalized === "::1") {

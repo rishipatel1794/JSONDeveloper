@@ -1,5 +1,6 @@
 import { buildOutboundHeaders } from "./headers";
 import { filterResponseHeaders } from "./response";
+import { handleSecurityAuditRequest } from "./security-audit/handler";
 import { validateOutboundUrl } from "./ssrf";
 
 interface Env {
@@ -248,7 +249,7 @@ async function handleProxyRequest(
   if (!ssrfCheck.allowed) {
     return errorResponse(
       ssrfCheck.reason ??
-        "This request target is not allowed.",
+      "This request target is not allowed.",
     );
   }
 
@@ -412,6 +413,27 @@ function corsHeaders(request: Request): HeadersInit {
   };
 }
 
+async function withCors(request: Request, respond: () => Promise<Response>): Promise<Response> {
+  const cors = corsHeaders(request);
+
+  if (request.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: cors });
+  }
+
+  if (request.method !== "POST") {
+    return new Response("Method Not Allowed", { status: 405, headers: cors });
+  }
+
+  const response = await respond();
+  const headers = new Headers(response.headers);
+
+  Object.entries(cors).forEach(([key, value]) => {
+    headers.set(key, value);
+  });
+
+  return new Response(response.body, { status: response.status, headers });
+}
+
 export default {
   async fetch(
     request: Request,
@@ -419,50 +441,16 @@ export default {
   ): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.pathname !== "/api/request") {
-      return new Response("Not Found", {
-        status: 404,
-      });
+    if (url.pathname === "/api/request") {
+      return withCors(request, () => handleProxyRequest(request, env));
     }
 
-    const cors = corsHeaders(request);
-
-    if (request.method === "OPTIONS") {
-      return new Response(null, {
-        status: 204,
-        headers: cors,
-      });
+    if (url.pathname === "/api/security-audit") {
+      return withCors(request, () => handleSecurityAuditRequest(request));
     }
 
-    if (request.method !== "POST") {
-      return new Response("Method Not Allowed", {
-        status: 405,
-        headers: cors,
-      });
-    }
-
-    const response =
-      await handleProxyRequest(
-        request,
-        env,
-      );
-
-    const headers = new Headers(
-      response.headers,
-    );
-
-    Object.entries(cors).forEach(
-      ([key, value]) => {
-        headers.set(key, value);
-      },
-    );
-
-    return new Response(
-      response.body,
-      {
-        status: response.status,
-        headers,
-      },
-    );
+    return new Response("Not Found", {
+      status: 404,
+    });
   },
 };

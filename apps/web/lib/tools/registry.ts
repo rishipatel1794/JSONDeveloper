@@ -12,6 +12,7 @@ import {
 	Regex,
 	ScanText,
 	Send,
+	ShieldAlert,
 	ShieldCheck,
 	Terminal,
 	Wrench,
@@ -324,6 +325,19 @@ const allTools: ToolDefinition[] = [
 	},
 
 	// Web
+	{
+		name: "Website Security Audit",
+		slug: "security-audit",
+		href: "/security-audit",
+		description: "Check security headers, HTTPS, cookies, CSP, and CORS for any public website.",
+		category: "web",
+		icon: ShieldAlert,
+		popular: true,
+		available: true,
+		isNew: true,
+		newUntil: NEW_TOOL_WINDOW,
+		keywords: ["security audit", "security headers", "https checker", "csp checker", "cookie security", "cors checker"],
+	},
 	{
 		name: "URL Encoder",
 		slug: "url-encoder",
