@@ -1,10 +1,12 @@
 "use client";
 
-import { Download } from "lucide-react";
+import { useState } from "react";
+import { Download, FileText, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { downloadTextFile } from "@/lib/download";
+import { generateAuditPdf } from "@/lib/security-audit/pdf";
 import type { AuditReport } from "@/lib/security-audit/types";
 
 interface ReportActionsProps {
@@ -25,7 +27,9 @@ function buildSummaryText(report: AuditReport): string {
 }
 
 export function ReportActions({ report }: ReportActionsProps) {
-	function handleDownload() {
+	const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+
+	function handleDownloadJson() {
 		const hostname = (() => {
 			try {
 				return new URL(report.url).hostname;
@@ -36,11 +40,25 @@ export function ReportActions({ report }: ReportActionsProps) {
 		downloadTextFile(JSON.stringify(report, null, 2), `security-audit-${hostname}.json`, "application/json");
 	}
 
+	async function handleDownloadPdf() {
+		if (isGeneratingPdf) return;
+		setIsGeneratingPdf(true);
+		try {
+			await generateAuditPdf(report);
+		} finally {
+			setIsGeneratingPdf(false);
+		}
+	}
+
 	return (
 		<div className="flex flex-wrap items-center gap-2">
-			<Button onClick={handleDownload} variant="outline" size="sm">
+			<Button onClick={handleDownloadPdf} variant="outline" size="sm" disabled={isGeneratingPdf}>
+				{isGeneratingPdf ? <Loader2 className="size-3.5 animate-spin" /> : <FileText className="size-3.5" />}
+				{isGeneratingPdf ? "Generating…" : "Download PDF"}
+			</Button>
+			<Button onClick={handleDownloadJson} variant="outline" size="sm">
 				<Download className="size-3.5" />
-				Download Report
+				Download JSON
 			</Button>
 			<CopyButton value={buildSummaryText(report)} label="Copy Summary" />
 		</div>

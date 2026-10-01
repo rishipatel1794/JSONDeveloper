@@ -15,7 +15,14 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/regex-tester",
-	keywords: ["regex tester", "regular expression tester", "regex debugger"],
+	keywords: [
+		"regex tester",
+		"regular expression tester",
+		"regex debugger",
+		"test regex online free",
+		"regex match checker",
+		"online regex validator",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "Regex Tester", description: DESCRIPTION, path: "/regex-tester" });

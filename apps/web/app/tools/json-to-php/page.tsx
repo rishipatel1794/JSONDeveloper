@@ -16,7 +16,13 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/json-to-php",
-	keywords: ["json to php", "php class generator", "json to php class"],
+	keywords: [
+		"json to php",
+		"php class generator",
+		"json to php class",
+		"convert json to php array",
+		"json to php object generator online",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JSON to PHP", description: DESCRIPTION, path: "/tools/json-to-php" });

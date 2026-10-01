@@ -15,7 +15,14 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/json-validator",
-	keywords: ["json validator", "json schema validator", "json lint"],
+	keywords: [
+		"json validator",
+		"json schema validator",
+		"json lint",
+		"validate json online free",
+		"json syntax checker",
+		"check json errors online",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JSON Validator", description: DESCRIPTION, path: "/json-validator" });

@@ -16,7 +16,14 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/sql-formatter",
-	keywords: ["sql formatter", "sql beautifier", "format sql query"],
+	keywords: [
+		"sql formatter",
+		"sql beautifier",
+		"format sql query",
+		"online sql formatter free",
+		"sql query beautifier",
+		"pretty print sql online",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "SQL Formatter", description: DESCRIPTION, path: "/sql-formatter" });

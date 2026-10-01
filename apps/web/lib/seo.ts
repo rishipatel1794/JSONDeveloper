@@ -9,6 +9,8 @@ export const siteUrl = productConfig.url.replace(/\/$/, "");
 export const defaultKeywords = [
 	"developer tools",
 	"online tools",
+	"free developer tools online",
+	"web based developer tools",
 	"json formatter",
 	"json validator",
 	"api client",
@@ -17,6 +19,8 @@ export const defaultKeywords = [
 	"regex tester",
 	"sql formatter",
 	"timestamp converter",
+	"all in one developer toolkit",
+	"developer utilities online",
 ] as const;
 
 function mergeKeywords(keywords: readonly string[] = []): string[] {

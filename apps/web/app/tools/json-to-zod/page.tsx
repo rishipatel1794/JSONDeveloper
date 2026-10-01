@@ -16,7 +16,13 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/json-to-zod",
-	keywords: ["json to zod", "zod schema generator", "zod from json"],
+	keywords: [
+		"json to zod",
+		"zod schema generator",
+		"zod from json",
+		"generate zod schema from json online",
+		"convert json to zod validator",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JSON to Zod", description: DESCRIPTION, path: "/tools/json-to-zod" });

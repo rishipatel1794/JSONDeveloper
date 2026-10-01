@@ -16,7 +16,18 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/security-audit",
-	keywords: ["website security audit", "security header checker", "https checker", "csp checker", "security scanner"],
+	keywords: [
+		"website security audit",
+		"security header checker",
+		"https checker",
+		"csp checker",
+		"security scanner",
+		"free website security scanner",
+		"check security headers online",
+		"hsts checker",
+		"cookie security checker",
+		"website vulnerability scanner free",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "Website Security Audit", description: DESCRIPTION, path: "/security-audit" });

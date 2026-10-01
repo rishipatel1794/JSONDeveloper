@@ -16,7 +16,14 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/curl-generator",
-	keywords: ["curl command generator", "http curl builder", "api curl tool"],
+	keywords: [
+		"curl command generator",
+		"http curl builder",
+		"api curl tool",
+		"generate curl command online",
+		"convert api request to curl",
+		"curl syntax generator free",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "cURL Generator", description: DESCRIPTION, path: "/curl-generator" });

@@ -14,7 +14,15 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/cron-parser",
-	keywords: ["cron parser", "explain cron expression", "cron expression meaning", "crontab explainer"],
+	keywords: [
+		"cron parser",
+		"explain cron expression",
+		"cron expression meaning",
+		"crontab explainer",
+		"what does this cron mean",
+		"cron expression translator",
+		"decode cron schedule online",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "Cron Parser", description: DESCRIPTION, path: "/tools/cron-parser" });

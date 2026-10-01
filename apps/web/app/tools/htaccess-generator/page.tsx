@@ -14,7 +14,15 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/htaccess-generator",
-	keywords: [".htaccess generator", "apache config generator", "htaccess redirect generator", "mod_rewrite generator"],
+	keywords: [
+		".htaccess generator",
+		"apache config generator",
+		"htaccess redirect generator",
+		"mod_rewrite generator",
+		"generate htaccess file online",
+		"free htaccess generator",
+		"apache rewrite rule generator",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: ".htaccess Generator", description: DESCRIPTION, path: "/tools/htaccess-generator" });

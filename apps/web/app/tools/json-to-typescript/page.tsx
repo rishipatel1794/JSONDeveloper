@@ -16,7 +16,13 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/json-to-typescript",
-	keywords: ["json to typescript", "json to interface", "typescript interface generator"],
+	keywords: [
+		"json to typescript",
+		"json to interface",
+		"typescript interface generator",
+		"convert json to typescript type online",
+		"generate ts interface from json",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JSON to TypeScript", description: DESCRIPTION, path: "/tools/json-to-typescript" });

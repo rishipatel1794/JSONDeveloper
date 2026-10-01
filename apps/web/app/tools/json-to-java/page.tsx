@@ -16,7 +16,13 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/json-to-java",
-	keywords: ["json to java", "java class generator", "json to pojo"],
+	keywords: [
+		"json to java",
+		"java class generator",
+		"json to pojo",
+		"convert json to java class online",
+		"generate java model from json",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JSON to Java", description: DESCRIPTION, path: "/tools/json-to-java" });

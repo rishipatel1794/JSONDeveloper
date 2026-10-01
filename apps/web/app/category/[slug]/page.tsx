@@ -21,6 +21,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 		title: `${category.name} Tools`,
 		description: `${category.description} Browse every ${category.name} tool on JSONDeveloper.`,
 		path: `/category/${category.slug}`,
+		keywords: [
+			`${category.name.toLowerCase()} tools online`,
+			`free ${category.name.toLowerCase()} tools`,
+			`${category.name.toLowerCase()} developer tools`,
+		],
 	});
 }
 

@@ -16,7 +16,14 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/jwt-decoder",
-	keywords: ["jwt decoder", "json web token", "jwt payload parser"],
+	keywords: [
+		"jwt decoder",
+		"json web token",
+		"jwt payload parser",
+		"decode jwt online",
+		"jwt debugger free",
+		"read jwt claims online",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JWT Decoder", description: DESCRIPTION, path: "/jwt-decoder" });

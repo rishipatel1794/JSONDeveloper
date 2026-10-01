@@ -23,7 +23,17 @@ export const metadata: Metadata = createPageMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/",
-	keywords: ["online developer tools", "free developer tools", "json tools", "api tools", "devops tools"],
+	keywords: [
+		"online developer tools",
+		"free developer tools",
+		"json tools",
+		"api tools",
+		"devops tools",
+		"developer tools online free",
+		"all in one developer toolkit",
+		"web based dev tools",
+		"browser based developer tools",
+	],
 });
 
 export default function Home() {

@@ -14,7 +14,15 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/cron-generator",
-	keywords: ["cron generator", "cron expression generator", "crontab generator", "cron schedule builder"],
+	keywords: [
+		"cron generator",
+		"cron expression generator",
+		"crontab generator",
+		"cron schedule builder",
+		"cron job generator online",
+		"generate cron syntax free",
+		"cron expression builder",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "Cron Generator", description: DESCRIPTION, path: "/tools/cron-generator" });

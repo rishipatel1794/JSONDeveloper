@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 		title: `${guide.title} - Developer Guides`,
 		description: guide.description,
 		path: `/developer-guides/${guide.slug}`,
+		keywords: guide.keywords,
 	});
 }
 

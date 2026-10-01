@@ -14,7 +14,14 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/timestamp-converter",
-	keywords: ["unix timestamp converter", "epoch converter", "timestamp to date"],
+	keywords: [
+		"unix timestamp converter",
+		"epoch converter",
+		"timestamp to date",
+		"unix time converter online",
+		"convert timestamp to human readable date",
+		"current unix timestamp",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "Timestamp Converter", description: DESCRIPTION, path: "/timestamp-converter" });

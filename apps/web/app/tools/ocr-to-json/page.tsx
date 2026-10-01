@@ -16,7 +16,14 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/ocr-to-json",
-	keywords: ["ocr to json", "paddleocr json", "ocr response converter", "document parsing to json"],
+	keywords: [
+		"ocr to json",
+		"paddleocr json",
+		"ocr response converter",
+		"document parsing to json",
+		"convert ocr output to json online",
+		"ocr text to structured json",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "OCR to JSON Converter", description: DESCRIPTION, path: "/tools/ocr-to-json" });

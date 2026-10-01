@@ -8,6 +8,7 @@ export interface DeveloperGuide {
 	readingTime: string;
 	sections: ContentSection[];
 	relatedTool: { label: string; href: string };
+	keywords?: string[];
 }
 
 export const DEVELOPER_GUIDES: DeveloperGuide[] = [
@@ -36,6 +37,7 @@ export const DEVELOPER_GUIDES: DeveloperGuide[] = [
 			},
 		],
 		relatedTool: { label: "Open the API Client", href: "/api-client" },
+		keywords: ["api client tutorial", "how to test api requests online", "send http request guide", "api client getting started"],
 	},
 	{
 		slug: "importing-a-postman-collection",
@@ -58,6 +60,7 @@ export const DEVELOPER_GUIDES: DeveloperGuide[] = [
 			},
 		],
 		relatedTool: { label: "Open the API Client", href: "/api-client" },
+		keywords: ["import postman collection", "postman alternative", "export curl from postman", "convert postman collection online"],
 	},
 	{
 		slug: "comparing-code-changes-with-code-diff",
@@ -84,6 +87,7 @@ export const DEVELOPER_GUIDES: DeveloperGuide[] = [
 			},
 		],
 		relatedTool: { label: "Open Code Diff", href: "/code-diff" },
+		keywords: ["code diff tutorial", "how to compare code changes", "git diff viewer online", "ignore whitespace diff"],
 	},
 	{
 		slug: "generating-and-debugging-curl-commands",
@@ -106,6 +110,7 @@ export const DEVELOPER_GUIDES: DeveloperGuide[] = [
 			},
 		],
 		relatedTool: { label: "Open the cURL Generator", href: "/curl-generator" },
+		keywords: ["curl command tutorial", "how to read curl command", "debug curl request", "curl flags explained"],
 	},
 ];
 

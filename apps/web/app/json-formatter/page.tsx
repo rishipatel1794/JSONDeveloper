@@ -17,7 +17,16 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/json-formatter",
-	keywords: ["json formatter", "json pretty print", "json beautifier", "format json online"],
+	keywords: [
+		"json formatter",
+		"json pretty print",
+		"json beautifier",
+		"format json online",
+		"free json formatter online",
+		"json formatter and validator",
+		"online json viewer",
+		"minify and format json",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JSON Formatter", description: DESCRIPTION, path: "/json-formatter" });

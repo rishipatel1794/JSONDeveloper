@@ -15,7 +15,15 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/json-minifier",
-	keywords: ["json minifier", "json compressor", "minify json", "compress json online"],
+	keywords: [
+		"json minifier",
+		"json compressor",
+		"minify json",
+		"compress json online",
+		"json minify online free",
+		"remove whitespace from json",
+		"shrink json file online",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JSON Minifier", description: DESCRIPTION, path: "/tools/json-minifier" });

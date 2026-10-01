@@ -67,7 +67,11 @@ async function fetchWithGuard(startUrl: string, signal: AbortSignal): Promise<Gu
       });
     } catch (error) {
       const isAbort = error instanceof Error && error.name === "AbortError";
-      return { error: isAbort ? "The request timed out." : "Unable to reach the target server." };
+      return {
+        error: isAbort
+          ? "The target server did not respond in time. This can happen if the site is slow, temporarily down, or blocks automated requests from cloud/datacenter networks."
+          : "Unable to reach the target server.",
+      };
     }
 
     if (response.status >= 300 && response.status < 400) {

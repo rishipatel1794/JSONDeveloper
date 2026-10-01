@@ -14,7 +14,14 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/nginx-config-generator",
-	keywords: ["nginx config generator", "nginx reverse proxy config", "nginx server block generator", "nginx ssl config"],
+	keywords: [
+		"nginx config generator",
+		"nginx reverse proxy config",
+		"nginx server block generator",
+		"nginx ssl config",
+		"generate nginx config online",
+		"free nginx config builder",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "Nginx Config Generator", description: DESCRIPTION, path: "/tools/nginx-config-generator" });

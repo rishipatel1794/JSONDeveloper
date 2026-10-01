@@ -11,6 +11,7 @@ export interface BlogPost {
 	readingTime: string;
 	sections: ContentSection[];
 	relatedTool: { label: string; href: string };
+	keywords?: string[];
 }
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -39,6 +40,7 @@ export const BLOG_POSTS: BlogPost[] = [
 			},
 		],
 		relatedTool: { label: "Try the JSON Validator", href: "/json-validator" },
+		keywords: ["json schema validation", "what is json schema", "json schema tutorial", "validate json structure"],
 	},
 	{
 		slug: "jwt-explained",
@@ -65,6 +67,7 @@ export const BLOG_POSTS: BlogPost[] = [
 			},
 		],
 		relatedTool: { label: "Try the JWT Decoder", href: "/jwt-decoder" },
+		keywords: ["how jwt works", "jwt explained", "json web token tutorial", "jwt signature explained"],
 	},
 	{
 		slug: "regex-lookaheads-lookbehinds",
@@ -91,6 +94,7 @@ export const BLOG_POSTS: BlogPost[] = [
 			},
 		],
 		relatedTool: { label: "Try the Regex Tester", href: "/regex-tester" },
+		keywords: ["regex lookahead", "regex lookbehind", "regex lookaround tutorial", "regex negative lookahead example"],
 	},
 	{
 		slug: "unix-timestamps-cheat-sheet",
@@ -117,6 +121,7 @@ export const BLOG_POSTS: BlogPost[] = [
 			},
 		],
 		relatedTool: { label: "Try the Timestamp Converter", href: "/timestamp-converter" },
+		keywords: ["unix timestamp explained", "seconds vs milliseconds timestamp", "epoch time cheat sheet", "unix timestamp guide"],
 	},
 ];
 

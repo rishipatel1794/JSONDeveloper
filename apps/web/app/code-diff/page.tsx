@@ -15,7 +15,15 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/code-diff",
-	keywords: ["code diff", "diff checker", "compare code", "code comparison tool"],
+	keywords: [
+		"code diff",
+		"diff checker",
+		"compare code",
+		"code comparison tool",
+		"text diff checker online",
+		"compare two files online",
+		"online diff viewer free",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "Code Diff", description: DESCRIPTION, path: "/code-diff" });

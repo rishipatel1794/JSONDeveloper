@@ -16,7 +16,13 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/json-to-python",
-	keywords: ["json to python", "python dataclass generator", "json to dataclass"],
+	keywords: [
+		"json to python",
+		"python dataclass generator",
+		"json to dataclass",
+		"convert json to python class online",
+		"json to pydantic model",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "JSON to Python", description: DESCRIPTION, path: "/tools/json-to-python" });

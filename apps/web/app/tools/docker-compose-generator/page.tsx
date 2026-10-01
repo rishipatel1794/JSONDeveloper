@@ -14,7 +14,15 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/tools/docker-compose-generator",
-	keywords: ["docker compose generator", "docker-compose.yml generator", "docker compose builder", "compose file generator"],
+	keywords: [
+		"docker compose generator",
+		"docker-compose.yml generator",
+		"docker compose builder",
+		"compose file generator",
+		"generate docker compose online",
+		"docker compose yaml generator free",
+		"create docker compose config",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "Docker Compose Generator", description: DESCRIPTION, path: "/tools/docker-compose-generator" });

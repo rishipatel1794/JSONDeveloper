@@ -14,7 +14,15 @@ export const metadata = createToolMetadata({
 	title: TITLE,
 	description: DESCRIPTION,
 	path: "/api-client",
-	keywords: ["rest api client", "http request tester", "api testing tool"],
+	keywords: [
+		"rest api client",
+		"http request tester",
+		"api testing tool",
+		"api request builder online",
+		"postman alternative online",
+		"test rest api online free",
+		"send http request browser",
+	],
 });
 
 const jsonLd = getToolJsonLd({ name: "API Client", description: DESCRIPTION, path: "/api-client" });
