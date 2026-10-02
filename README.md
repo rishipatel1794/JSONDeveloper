@@ -1,159 +1,106 @@
-# Turborepo starter
+# JSONDeveloper
 
-This Turborepo starter is maintained by the Turborepo core team.
+Free, fast, browser-based developer tools — JSON, API, regex, SQL, web, and DevOps utilities. Most tools run entirely client-side; the few that need a backend (API Client, Website Security Audit) go through a small, SSRF-protected proxy rather than a general-purpose server.
 
-## Using this example
+Live at [jsondeveloper.com](https://jsondeveloper.com).
 
-Run the following command:
+## Monorepo structure
 
-```sh
-npx create-turbo@latest
+Turborepo + pnpm workspaces.
+
+```
+apps/
+  web/     Next.js 16 (App Router) frontend — all tool UIs, SEO content, blog/guides.
+           Statically exported (output: "export") and deployed to Cloudflare Workers.
+  proxy/   Cloudflare Worker (no framework) — api.jsondeveloper.com in production.
+           Handles /api/request (the API Client's outbound proxy) and
+           /api/security-audit (the Website Security Audit backend), both with
+           their own SSRF validation, rate limiting, and resource limits.
+  api/     Express.js + TypeScript backend. Exists in this repo but is deployed
+           and operated separately — it is not part of this repo's build/deploy
+           pipeline (see Deployment below).
+packages/
+  config/            Shared product config (name, description, URLs) from env vars.
+  ui/                Shared React component library.
+  types/             Shared TypeScript types.
+  validators/        Shared Zod schemas.
+  eslint-config/      Shared ESLint config.
+  typescript-config/  Shared tsconfig bases.
 ```
 
-## What's inside?
+Each app/package is 100% TypeScript.
 
-This Turborepo includes the following packages/apps:
+## Tech stack
 
-### Apps and Packages
+- **Frontend:** Next.js 16 (App Router), React, TypeScript, Tailwind CSS, shadcn/ui-style components
+- **Backend:** Cloudflare Workers (`apps/proxy`), Express.js + TypeScript (`apps/api`)
+- **Validation:** Zod
+- **Testing:** Vitest
+- **Monorepo:** Turborepo + pnpm
+- **Deployment:** Cloudflare Workers (`wrangler`)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## Tools
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Grouped by category; only tools marked `available: true` in `apps/web/lib/tools/registry.ts` are live. Everything else in the registry is a planned/"coming soon" entry already reserved in navigation.
 
-### Utilities
+- **JSON:** JSON Formatter, JSON Validator, JSON Minifier, JSON to TypeScript, JSON to Zod, JSON to Python, JSON to PHP, JSON to Java, OCR to JSON
+- **API:** API Client, JWT Decoder, cURL Generator
+- **Regex:** Regex Tester
+- **Database:** SQL Formatter
+- **Web:** Website Security Audit
+- **Utilities:** Timestamp Converter, Code Diff
+- **DevOps:** Cron Generator, Cron Parser, .htaccess Generator, Nginx Config Generator, Docker Compose Generator
 
-This Turborepo has some additional tools already setup for you:
+## Getting started
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+Requires Node 18+ and pnpm.
 
 ```sh
-cd my-turborepo
-turbo build
+pnpm install
+cp .env.example .env   # fill in values, or keep the local-dev defaults
 ```
 
-Without global `turbo`, use your package manager:
+Run everything:
 
 ```sh
-cd my-turborepo
-npx turbo build
-pnpm dlx turbo build
-pnpm exec turbo build
+pnpm dev          # turbo run dev — web on :3001, proxy via `wrangler dev` (defaults to :8787)
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+If you run the proxy on a non-default port, update `NEXT_PUBLIC_API_URL` in `.env` to match.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
-```
-
-Without global `turbo`:
+Run a single app ([filtered](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)):
 
 ```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
 pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+pnpm exec turbo dev --filter=proxy
 ```
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+Other common commands (each also runnable scoped to one app via `--filter`):
 
 ```sh
-cd my-turborepo
-turbo login
+pnpm build         # turbo run build
+pnpm test          # turbo run test (vitest)
+pnpm lint          # turbo run lint
+pnpm check-types   # turbo run check-types
+pnpm format        # prettier --write
 ```
 
-Without global `turbo`, use your package manager:
+## Deployment
+
+`deploy.py` builds and deploys `apps/proxy` and `apps/web` to Cloudflare Workers, in that order:
 
 ```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
+python deploy.py
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+It runs, in sequence: `wrangler deploy` in `apps/proxy`, `pnpm run build` in `apps/web`, then `wrangler deploy` in `apps/web`. `apps/api` is **not** touched by this script — it's deployed and hosted separately.
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Security
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+`apps/proxy` enforces SSRF protection (blocking localhost, private/reserved IP ranges, link-local and cloud-metadata addresses, and DNS-rebinding via resolved-address re-checking) on every outbound request it makes on a user's behalf, plus per-feature rate limiting and request/response size and timeout limits. See `apps/proxy/src/ssrf.ts` and `apps/proxy/src/security-audit/ssrfGuard.ts`.
 
-```sh
-turbo link
-```
+## Useful links
 
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+- [Turborepo docs](https://turborepo.dev/docs)
+- [Next.js docs](https://nextjs.org/docs)
+- [Cloudflare Workers docs](https://developers.cloudflare.com/workers/)
