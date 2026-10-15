@@ -1,10 +1,10 @@
 import { Terminal } from "lucide-react";
 
-import { createToolMetadata, getToolJsonLd } from "@/lib/seo";
+import { createToolMetadata, getFaqJsonLd, getToolJsonLd } from "@/lib/seo";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { RelatedTools } from "@/components/tools/shared/RelatedTools";
 import { CronParser } from "@/components/tools/cron-parser/CronParser";
-import { CronParserFaq } from "@/components/tools/cron-parser/CronParserFaq";
+import { CronParserFaq, FAQ_ITEMS } from "@/components/tools/cron-parser/CronParserFaq";
 import { CronParserSeoContent } from "@/components/tools/cron-parser/CronParserSeoContent";
 
 const TITLE = "Cron Parser - Explain Cron Expressions Online";
@@ -26,11 +26,13 @@ export const metadata = createToolMetadata({
 });
 
 const jsonLd = getToolJsonLd({ name: "Cron Parser", description: DESCRIPTION, path: "/tools/cron-parser" });
+const faqJsonLd = getFaqJsonLd(FAQ_ITEMS);
 
 export default function CronParserPage() {
 	return (
 		<main>
 			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
 			<div className="container mx-auto max-w-7xl px-4 py-10">
 				<ToolPageHeader

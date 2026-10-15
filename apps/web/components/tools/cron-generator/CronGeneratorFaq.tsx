@@ -1,6 +1,6 @@
 import { Accordion } from "@/components/ui/Accordion";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
 	{
 		question: "What does an asterisk (*) mean in cron?",
 		answer: "It means \"every value is valid for this field\" — for example * in the hour field means the job can run in any hour, subject to whatever the minute field restricts it to.",

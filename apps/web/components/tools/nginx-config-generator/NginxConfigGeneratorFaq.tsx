@@ -1,6 +1,6 @@
 import { Accordion } from "@/components/ui/Accordion";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
 	{
 		question: "Why does the generator never write \"ssl on;\"?",
 		answer: "That directive was removed in Nginx 1.25 and is deprecated before that — modern configs enable TLS per-listen-directive instead, with listen 443 ssl;. This tool always uses the current, supported syntax.",

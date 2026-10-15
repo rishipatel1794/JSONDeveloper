@@ -1,10 +1,10 @@
 import { Container } from "lucide-react";
 
-import { createToolMetadata, getToolJsonLd } from "@/lib/seo";
+import { createToolMetadata, getFaqJsonLd, getToolJsonLd } from "@/lib/seo";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { RelatedTools } from "@/components/tools/shared/RelatedTools";
 import { HtaccessGenerator } from "@/components/tools/htaccess-generator/HtaccessGenerator";
-import { HtaccessGeneratorFaq } from "@/components/tools/htaccess-generator/HtaccessGeneratorFaq";
+import { HtaccessGeneratorFaq, FAQ_ITEMS } from "@/components/tools/htaccess-generator/HtaccessGeneratorFaq";
 import { HtaccessGeneratorSeoContent } from "@/components/tools/htaccess-generator/HtaccessGeneratorSeoContent";
 
 const TITLE = ".htaccess Generator - Generate Apache Configuration Online";
@@ -26,17 +26,19 @@ export const metadata = createToolMetadata({
 });
 
 const jsonLd = getToolJsonLd({ name: ".htaccess Generator", description: DESCRIPTION, path: "/tools/htaccess-generator" });
+const faqJsonLd = getFaqJsonLd(FAQ_ITEMS);
 
 export default function HtaccessGeneratorPage() {
 	return (
 		<main>
 			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
 			<div className="container mx-auto max-w-7xl px-4 py-10">
 				<ToolPageHeader
 					icon={Container}
 					title=".htaccess Generator"
-					description="Generate a conservative, valid .htaccess file for HTTPS, redirects, caching, compression, and security headers."
+					description="Generate and check a valid .htaccess file for HTTPS, redirects, caching, compression, and security headers."
 				/>
 
 				<HtaccessGenerator />

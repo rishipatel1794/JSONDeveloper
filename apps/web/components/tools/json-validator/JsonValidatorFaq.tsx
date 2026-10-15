@@ -35,6 +35,11 @@ export const FAQ_ITEMS = [
 		answer: "Switch to the JSON Schema tab, paste your schema, and the JSON from the input above is validated against it automatically.",
 	},
 	{
+		question: "Is this the same as a JSON checker or JSON verifier?",
+		answer:
+			"Yes — \"JSON validator\", \"JSON checker\", and \"JSON verifier\" all describe the same task: confirming a document is syntactically valid JSON. This tool does that, plus duplicate-key detection, structure analysis, and schema validation in the same place.",
+	},
+	{
 		question: "What is the difference between JSON Formatter and JSON Validator?",
 		answer:
 			"JSON Formatter focuses on formatting, minifying, and beautifying JSON you already know is valid. JSON Validator focuses on debugging and analysis — pinpointing syntax errors, detecting duplicate keys, computing statistics, exploring structure, validating against a schema, and generating TypeScript, Zod, or JSON Schema.",

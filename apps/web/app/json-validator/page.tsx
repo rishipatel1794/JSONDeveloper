@@ -38,7 +38,7 @@ export default function JsonValidatorPage() {
 				<ToolPageHeader
 					icon={ShieldCheck}
 					title="JSON Validator"
-					description="Validate, debug, and analyze JSON instantly."
+					description="Validate, check, and debug JSON instantly — syntax errors, duplicate keys, and schema validation."
 				/>
 
 				<JsonValidator />

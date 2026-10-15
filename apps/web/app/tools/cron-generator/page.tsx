@@ -1,10 +1,10 @@
 import { Terminal } from "lucide-react";
 
-import { createToolMetadata, getToolJsonLd } from "@/lib/seo";
+import { createToolMetadata, getFaqJsonLd, getToolJsonLd } from "@/lib/seo";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { RelatedTools } from "@/components/tools/shared/RelatedTools";
 import { CronGenerator } from "@/components/tools/cron-generator/CronGenerator";
-import { CronGeneratorFaq } from "@/components/tools/cron-generator/CronGeneratorFaq";
+import { CronGeneratorFaq, FAQ_ITEMS } from "@/components/tools/cron-generator/CronGeneratorFaq";
 import { CronGeneratorSeoContent } from "@/components/tools/cron-generator/CronGeneratorSeoContent";
 
 const TITLE = "Cron Generator - Create Cron Expressions Online";
@@ -26,11 +26,13 @@ export const metadata = createToolMetadata({
 });
 
 const jsonLd = getToolJsonLd({ name: "Cron Generator", description: DESCRIPTION, path: "/tools/cron-generator" });
+const faqJsonLd = getFaqJsonLd(FAQ_ITEMS);
 
 export default function CronGeneratorPage() {
 	return (
 		<main>
 			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
 			<div className="container mx-auto max-w-7xl px-4 py-10">
 				<ToolPageHeader

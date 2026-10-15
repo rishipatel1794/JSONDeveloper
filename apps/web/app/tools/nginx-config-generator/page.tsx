@@ -1,10 +1,10 @@
 import { Container } from "lucide-react";
 
-import { createToolMetadata, getToolJsonLd } from "@/lib/seo";
+import { createToolMetadata, getFaqJsonLd, getToolJsonLd } from "@/lib/seo";
 import { ToolPageHeader } from "@/components/tools/shared/ToolPageHeader";
 import { RelatedTools } from "@/components/tools/shared/RelatedTools";
 import { NginxConfigGenerator } from "@/components/tools/nginx-config-generator/NginxConfigGenerator";
-import { NginxConfigGeneratorFaq } from "@/components/tools/nginx-config-generator/NginxConfigGeneratorFaq";
+import { NginxConfigGeneratorFaq, FAQ_ITEMS } from "@/components/tools/nginx-config-generator/NginxConfigGeneratorFaq";
 import { NginxConfigGeneratorSeoContent } from "@/components/tools/nginx-config-generator/NginxConfigGeneratorSeoContent";
 
 const TITLE = "Nginx Config Generator - Create Nginx Server Configs";
@@ -25,11 +25,13 @@ export const metadata = createToolMetadata({
 });
 
 const jsonLd = getToolJsonLd({ name: "Nginx Config Generator", description: DESCRIPTION, path: "/tools/nginx-config-generator" });
+const faqJsonLd = getFaqJsonLd(FAQ_ITEMS);
 
 export default function NginxConfigGeneratorPage() {
 	return (
 		<main>
 			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
 			<div className="container mx-auto max-w-7xl px-4 py-10">
 				<ToolPageHeader

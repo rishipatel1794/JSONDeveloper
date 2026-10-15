@@ -1,6 +1,11 @@
 import { Accordion } from "@/components/ui/Accordion";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
+	{
+		question: "Can I use this to check or test an .htaccess file I already have?",
+		answer:
+			"This tool generates new .htaccess rules rather than parsing one you paste in, but every rule it outputs is already syntactically valid, so you can use it to rebuild and replace a section you're unsure about. To check an existing file directly on your server, run sudo apachectl configtest (or apache2ctl configtest) — it validates syntax across the whole config, .htaccess included, without restarting the server.",
+	},
 	{
 		question: "Why isn't my .htaccess file working?",
 		answer: "The most common cause is that mod_rewrite (or mod_headers/mod_deflate/mod_expires, for the relevant sections) isn't enabled on your server, or AllowOverride is set to None in the main Apache config for that directory. Contact your host or check your server's httpd.conf if directives seem to be ignored entirely.",

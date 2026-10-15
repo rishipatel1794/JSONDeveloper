@@ -1,6 +1,6 @@
 import { Accordion } from "@/components/ui/Accordion";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
 	{
 		question: "Why does a database service need a volume?",
 		answer: "Without a volume, a database's data lives only inside the container's writable layer, which is destroyed when the container is removed. Mounting a named volume (like postgres_data) to the database's data directory keeps your data across docker compose down and docker compose up cycles.",
