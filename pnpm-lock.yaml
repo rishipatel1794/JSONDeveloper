@@ -88,6 +88,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@eslint-community/regexpp':
+        specifier: ^4.12.1
+        version: 4.12.2
       '@monaco-editor/react':
         specifier: ^4.7.0
         version: 4.7.0(monaco-editor@0.56.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -164,6 +167,9 @@ importers:
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
+      esbuild:
+        specifier: ^0.28.2
+        version: 0.28.2
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.7.0)

@@ -5,8 +5,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 3001",
+    "predev": "pnpm run build:workers",
     "sync:config": "node scripts/sync-runtime-config.mjs",
-    "prebuild": "pnpm run sync:config",
+    "build:workers": "node scripts/build-workers.mjs",
+    "prebuild": "pnpm run sync:config && pnpm run build:workers",
     "build": "next build",
     "postbuild": "node scripts/copy-standalone-assets.mjs",
     "start": "next start",
@@ -16,6 +18,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@eslint-community/regexpp": "^4.12.1",
     "@monaco-editor/react": "^4.7.0",
     "@repo/config": "workspace:^",
     "@repo/ui": "workspace:*",
@@ -43,6 +46,7 @@
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "dotenv": "^17.4.2",
+    "esbuild": "^0.28.2",
     "eslint": "^9.39.1",
     "tailwindcss": "^4.3.3",
     "typescript": "5.9.2",
