@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			priority: tool.popular ? 0.8 : 0.6,
 		}));
 
-	const staticEntries: MetadataRoute.Sitemap = ["/about", "/contact", "/privacy", "/terms", "/blog", "/developer-guides"].map(path => ({
+	const staticEntries: MetadataRoute.Sitemap = ["/about", "/contact", "/privacy", "/terms", "/blog", "/developer-guides", "/extension"].map(path => ({
 		url: `${baseUrl}${path}`,
 		lastModified,
 		changeFrequency: "yearly",

@@ -1,0 +1,13 @@
+{
+  "name": "jsondeveloper-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Manifest V3 Chrome extension for JSONDeveloper — standalone, not part of the website's build or pnpm workspace.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.mjs\""
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1"
+  }
+}

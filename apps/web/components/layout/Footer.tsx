@@ -16,12 +16,14 @@ const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
 		links: [
 			{ label: "Tools", href: "/#popular-tools" },
 			{ label: "Categories", href: "/#categories" },
+			{ label: "JSON Visualizer", href: "/visualizer" },
 			{ label: "JSON Formatter", href: "/json-formatter" },
 		],
 	},
 	{
 		title: "Resources",
 		links: [
+			{ label: "Chrome Extension", href: "/extension" },
 			{ label: "Developer Guides", href: "/developer-guides" },
 			{ label: "Blog", href: "/blog" },
 			{ label: "FAQ", href: "/#faq" },

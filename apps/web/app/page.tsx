@@ -13,6 +13,7 @@ import { SeoContent } from "@/components/home/SeoContent";
 import { ToolCategories } from "@/components/home/ToolCategories";
 import { ToolkitSection } from "@/components/home/ToolkitSection";
 import { ToolWorkflows } from "@/components/home/ToolWorkflows";
+import { VisualizerShowcase } from "@/components/home/VisualizerShowcase";
 import { WhyDevelopers } from "@/components/home/WhyDevelopers";
 
 const TITLE = `${siteName} | Free Online Developer Tools`;
@@ -64,6 +65,7 @@ export default function Home() {
 			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
 			<Hero />
+			<VisualizerShowcase />
 			<PopularTools />
 			<ToolCategories />
 			<ToolWorkflows />

@@ -13,8 +13,10 @@ import { ThemeToggle } from "./ThemeToggle";
 
 const NAV_LINKS = [
 	{ label: "Tools", href: "/#popular-tools" },
-	{ label: "Categories", href: "/#categories" },
-	{ label: "Developer Guides", href: "/developer-guides" },
+	{ label: "Visualizer", href: "/visualizer" },
+	{ label: "API Client", href: "/api-client" },
+	{ label: "Security Audit", href: "/security-audit" },
+	{ label: "Extension", href: "/extension" },
 	{ label: "Blog", href: "/blog" },
 ];
 

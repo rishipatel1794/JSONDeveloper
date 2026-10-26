@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>JSONDeveloper</title>
+		<link rel="stylesheet" href="popup.css" />
+	</head>
+	<body>
+		<header class="jd-header">
+			<img src="../../icons/icon32.png" alt="" width="20" height="20" />
+			<span>JSONDeveloper</span>
+		</header>
+
+		<main class="jd-main">
+			<button type="button" id="open-editor" class="jd-item jd-primary">
+				<span>Open JSONDeveloper editor</span>
+			</button>
+
+			<button type="button" id="open-visualizer" class="jd-item">
+				<span>Open JSON Visualizer</span>
+			</button>
+
+			<button type="button" id="format-clipboard" class="jd-item">
+				<span>Format copied JSON</span>
+			</button>
+
+			<label class="jd-item jd-file-label" for="open-file">
+				<span>Open a JSON file…</span>
+			</label>
+			<input type="file" id="open-file" accept="application/json,.json" hidden />
+
+			<div id="format-result" class="jd-result" hidden></div>
+
+			<div class="jd-section">
+				<label class="jd-toggle-row">
+					<span>Auto-format JSON pages</span>
+					<input type="checkbox" id="auto-format-toggle" />
+				</label>
+
+				<label class="jd-select-row">
+					<span>Theme</span>
+					<select id="theme-select"></select>
+				</label>
+
+				<label class="jd-select-row">
+					<span>Font size</span>
+					<select id="font-size-select"></select>
+				</label>
+
+				<label class="jd-select-row">
+					<span>Font family</span>
+					<select id="font-family-select"></select>
+				</label>
+			</div>
+
+			<div class="jd-footer">
+				<a href="https://jsondeveloper.com" target="_blank" rel="noopener noreferrer">Website</a>
+				<a href="https://jsondeveloper.com/about" target="_blank" rel="noopener noreferrer">Help</a>
+				<a href="https://github.com/rishipatel1794/JSONDeveloper" target="_blank" rel="noopener noreferrer">GitHub</a>
+			</div>
+		</main>
+
+		<script type="module" src="popup.js"></script>
+	</body>
+</html>

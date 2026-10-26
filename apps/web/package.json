@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@eslint-community/regexpp": "^4.12.1",
+    "@xyflow/react": "^12.3.5",
     "@monaco-editor/react": "^4.7.0",
     "@repo/config": "workspace:^",
     "@repo/ui": "workspace:*",

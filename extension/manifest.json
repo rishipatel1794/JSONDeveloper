@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "JSONDeveloper — JSON Viewer & Formatter",
+  "version": "1.1.0",
+  "description": "Automatically formats raw JSON responses into a readable, collapsible tree view, and hands off data to the JSONDeveloper editor with one click.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/content/json-viewer.js"],
+      "css": ["src/content/json-viewer.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": ["https://jsondeveloper.com/visualizer*"],
+      "js": ["src/content/editor-bridge.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://jsondeveloper.com/*"],
+  "minimum_chrome_version": "114"
+}

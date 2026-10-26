@@ -1,3 +1,5 @@
+import { Puzzle } from "lucide-react";
+
 import { Button } from "@/components/ui/Button";
 
 import { ToolSearch } from "./ToolSearch";
@@ -23,9 +25,13 @@ export function Hero() {
 					<ToolSearch />
 				</div>
 
-				<div className="mt-8">
+				<div className="mt-8 flex flex-wrap items-center justify-center gap-3">
 					<Button href="#popular-tools" size="lg">
 						Explore Tools
+					</Button>
+					<Button href="/extension" variant="outline" size="lg">
+						<Puzzle className="size-4" />
+						Get the Chrome Extension
 					</Button>
 				</div>
 			</div>

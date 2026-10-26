@@ -1,0 +1,335 @@
+/* Theme tokens — see extension/src/shared/constants.js THEMES for the id list (kept in sync).
+   Every theme below defines the full token set so no rule falls back to another theme's color. */
+#jd-json-viewer-root {
+	/* Midnight Teal — default */
+	--background: #0f172a;
+	--surface: #1e293b;
+	--surface-hover: #273449;
+	--border: #334155;
+	--text-primary: #e2e8f0;
+	--text-secondary: #94a3b8;
+	--key-color: #5eead4;
+	--string-color: #4ade80;
+	--number-color: #818cf8;
+	--boolean-color: #fbbf24;
+	--null-color: #94a3b8;
+	--accent-color: #2dd4bf;
+	--accent-contrast: #0f172a;
+	--error-color: #f87171;
+	--jd-font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+	--jd-font-size: 13px;
+	--jd-line-height: 1.7;
+
+	position: fixed;
+	inset: 0;
+	background: var(--background);
+	color: var(--text-primary);
+	font-family: var(--jd-font-family);
+	font-size: var(--jd-font-size);
+	line-height: var(--jd-line-height);
+	display: flex;
+	flex-direction: column;
+	z-index: 2147483647;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+}
+
+#jd-json-viewer-root[data-jd-theme="light-clean"] {
+	--background: #ffffff;
+	--surface: #f8fafc;
+	--surface-hover: #eef2f7;
+	--border: #dde3ea;
+	--text-primary: #0f172a;
+	--text-secondary: #475569;
+	--key-color: #0f766e;
+	--string-color: #15803d;
+	--number-color: #4338ca;
+	--boolean-color: #b45309;
+	--null-color: #64748b;
+	--accent-color: #0d9488;
+	--accent-contrast: #ffffff;
+	--error-color: #b91c1c;
+}
+
+#jd-json-viewer-root[data-jd-theme="vscode-dark"] {
+	--background: #1e1e1e;
+	--surface: #252526;
+	--surface-hover: #2a2d2e;
+	--border: #3c3c3c;
+	--text-primary: #d4d4d4;
+	--text-secondary: #858585;
+	--key-color: #9cdcfe;
+	--string-color: #ce9178;
+	--number-color: #b5cea8;
+	--boolean-color: #569cd6;
+	--null-color: #808080;
+	--accent-color: #0a84ff;
+	--accent-contrast: #ffffff;
+	--error-color: #f48771;
+}
+
+#jd-json-viewer-root[data-jd-theme="dracula"] {
+	--background: #282a36;
+	--surface: #21222c;
+	--surface-hover: #44475a;
+	--border: #44475a;
+	--text-primary: #f8f8f2;
+	--text-secondary: #6272a4;
+	--key-color: #8be9fd;
+	--string-color: #f1fa8c;
+	--number-color: #bd93f9;
+	--boolean-color: #ff79c6;
+	--null-color: #6272a4;
+	--accent-color: #bd93f9;
+	--accent-contrast: #282a36;
+	--error-color: #ff5555;
+}
+
+#jd-json-viewer-root[data-jd-theme="high-contrast"] {
+	--background: #000000;
+	--surface: #000000;
+	--surface-hover: #262626;
+	--border: #ffffff;
+	--text-primary: #ffffff;
+	--text-secondary: #d9d9d9;
+	--key-color: #00ffff;
+	--string-color: #00ff00;
+	--number-color: #ffff00;
+	--boolean-color: #ff66ff;
+	--null-color: #d9d9d9;
+	--accent-color: #ffffff;
+	--accent-contrast: #000000;
+	--error-color: #ff6666;
+}
+
+#jd-json-viewer-root[data-jd-theme="high-contrast"] * {
+	border-color: var(--border) !important;
+}
+
+/* Type is never conveyed by color alone: strings keep their JSON quote marks, booleans/null render
+   their literal text, null is additionally italicized, and keys are bold — color is a secondary,
+   accessibility-friendly cue layered on top of those structural/textual differences. */
+
+#jd-json-viewer-root .jd-toolbar {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 14px;
+	background: var(--surface);
+	border-bottom: 1px solid var(--border);
+	flex-shrink: 0;
+	flex-wrap: wrap;
+}
+
+#jd-json-viewer-root .jd-brand {
+	font-weight: 700;
+	color: var(--accent-color);
+	margin-right: 8px;
+	letter-spacing: -0.01em;
+}
+
+#jd-json-viewer-root .jd-mode-toggle {
+	display: flex;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+#jd-json-viewer-root .jd-group {
+	display: flex;
+	gap: 4px;
+}
+
+#jd-json-viewer-root .jd-spacer {
+	flex: 1 1 auto;
+}
+
+#jd-json-viewer-root .jd-btn {
+	background: transparent;
+	color: var(--text-primary);
+	border: 1px solid transparent;
+	padding: 6px 11px;
+	font-size: 12px;
+	font-family: inherit;
+	cursor: pointer;
+	border-radius: 6px;
+	transition: background-color 120ms ease, color 120ms ease;
+}
+
+#jd-json-viewer-root .jd-mode-toggle .jd-btn {
+	border-radius: 0;
+}
+
+#jd-json-viewer-root .jd-btn:hover {
+	background: var(--surface-hover);
+}
+
+#jd-json-viewer-root .jd-btn:focus-visible,
+#jd-json-viewer-root .jd-row:focus-visible,
+#jd-json-viewer-root select:focus-visible,
+#jd-json-viewer-root .jd-string-toggle:focus-visible {
+	outline: 2px solid var(--accent-color);
+	outline-offset: 1px;
+}
+
+#jd-json-viewer-root .jd-btn.jd-active {
+	background: var(--accent-color);
+	color: var(--accent-contrast);
+}
+
+#jd-json-viewer-root .jd-btn.jd-primary {
+	background: var(--accent-color);
+	color: var(--accent-contrast);
+	font-weight: 600;
+}
+
+#jd-json-viewer-root .jd-btn.jd-error-flash {
+	background: var(--error-color);
+	color: #ffffff;
+}
+
+/* Settings popover */
+
+#jd-json-viewer-root .jd-settings-wrap {
+	position: relative;
+}
+
+#jd-json-viewer-root .jd-settings-panel {
+	position: absolute;
+	top: calc(100% + 6px);
+	right: 0;
+	z-index: 1;
+	min-width: 230px;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	padding: 12px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+#jd-json-viewer-root .jd-settings-panel[hidden] {
+	display: none;
+}
+
+#jd-json-viewer-root .jd-settings-row {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	font-size: 11px;
+	color: var(--text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+#jd-json-viewer-root .jd-settings-row select {
+	background: var(--background);
+	color: var(--text-primary);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	padding: 6px 8px;
+	font-size: 12px;
+	font-family: inherit;
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+#jd-json-viewer-root .jd-content {
+	flex: 1;
+	overflow: auto;
+	padding: 14px;
+}
+
+#jd-json-viewer-root .jd-raw {
+	white-space: pre-wrap;
+	word-break: break-word;
+	margin: 0;
+	color: var(--text-primary);
+}
+
+#jd-json-viewer-root .jd-tree {
+	--jd-indent: 18px;
+}
+
+#jd-json-viewer-root .jd-row {
+	display: flex;
+	align-items: baseline;
+	padding: 2px 6px 2px 0;
+	white-space: pre;
+	border-radius: 4px;
+	border-left: 2px solid transparent;
+	cursor: default;
+}
+
+/* Subtle indentation guide — a vertical rule tracing each nesting level. */
+#jd-json-viewer-root .jd-children {
+	border-left: 1px solid var(--border);
+	margin-left: 6px;
+}
+
+#jd-json-viewer-root .jd-row:hover {
+	background: var(--surface-hover);
+}
+
+#jd-json-viewer-root .jd-row.jd-selected {
+	background: var(--surface-hover);
+	border-left-color: var(--accent-color);
+}
+
+#jd-json-viewer-root .jd-toggle {
+	display: inline-block;
+	width: 14px;
+	color: var(--text-secondary);
+	cursor: pointer;
+	user-select: none;
+	flex-shrink: 0;
+}
+
+#jd-json-viewer-root .jd-key {
+	color: var(--key-color);
+	font-weight: 600;
+}
+
+#jd-json-viewer-root .jd-value.jd-string {
+	color: var(--string-color);
+}
+
+#jd-json-viewer-root .jd-value.jd-number {
+	color: var(--number-color);
+}
+
+#jd-json-viewer-root .jd-value.jd-boolean {
+	color: var(--boolean-color);
+	font-weight: 600;
+}
+
+#jd-json-viewer-root .jd-value.jd-null {
+	color: var(--null-color);
+	font-style: italic;
+}
+
+#jd-json-viewer-root .jd-value.jd-object,
+#jd-json-viewer-root .jd-value.jd-array {
+	color: var(--text-secondary);
+}
+
+#jd-json-viewer-root .jd-string-toggle {
+	background: none;
+	border: none;
+	color: var(--accent-color);
+	cursor: pointer;
+	font: inherit;
+	padding: 0 0 0 6px;
+	text-decoration: underline;
+}
+
+#jd-json-viewer-root .jd-children.jd-collapsed {
+	display: none;
+}
+
+#jd-json-viewer-root .jd-empty-state {
+	color: var(--text-secondary);
+	padding: 24px 4px;
+}
