@@ -35,13 +35,13 @@ function GraphNodeCardImpl({ data }: NodeProps & { data: GraphNodeFlowData }) {
 				if (event.key === "Enter" || event.key === " ") onSelect(node.path);
 			}}
 			className={cn(
-				"flex w-[200px] cursor-pointer items-center gap-1.5 rounded-lg border px-3 py-2.5 text-xs shadow-sm transition-colors",
+				"flex w-50 cursor-pointer items-center gap-1.5 rounded-lg border px-3 py-2.5 text-xs shadow-sm transition-colors",
 				TYPE_STYLES[node.valueType] ?? TYPE_STYLES.null,
 				selected && "ring-2 ring-primary",
 				highlighted && "ring-2 ring-warning",
 			)}
 		>
-			<Handle type="target" position={Position.Left} className="!size-1.5 !border-0 !bg-border-subtle" />
+			<Handle type="target" position={Position.Left} className="size-1.5! border-0! bg-border-subtle!" />
 
 			{hasChildren && (
 				<button
@@ -66,7 +66,7 @@ function GraphNodeCardImpl({ data }: NodeProps & { data: GraphNodeFlowData }) {
 				<span className="shrink-0 rounded-full bg-background/60 px-1.5 py-0.5 font-mono text-[10px]">{node.childCount}</span>
 			)}
 
-			<Handle type="source" position={Position.Right} className="!size-1.5 !border-0 !bg-border-subtle" />
+			<Handle type="source" position={Position.Right} className="size-1.5! border-0! bg-border-subtle!" />
 		</div>
 	);
 }
